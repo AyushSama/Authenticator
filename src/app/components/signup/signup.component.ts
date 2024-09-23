@@ -5,6 +5,7 @@ import { ApiService } from '../../service/api.service';
 import { Subject, takeUntil } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { User } from '../../interfaces/User';
 
 @Component({
   selector: 'app-signup',
@@ -24,13 +25,20 @@ export class SignupComponent {
   handleSignup() {
     this.submitted = true; // Mark the form as submitted
     if (this.email && this.password) {
-      this.signUpUser(this.email,this.password);
+      const user: User = {
+        userId : 0,
+        email: this.email,
+        password: this.password,
+        createdDate: new Date() // Add createdDate
+      };
+      console.log(user);
+      this.signUpUser(user);
     }
   }
 
-  signUpUser(email:string,password:string){
+  signUpUser(user:User){
     this.apiService
-      .postUser(email,password)
+      .postUser(user)
       .pipe(takeUntil(this._onDestroy))
       .subscribe({
         next: (res: any) => {
