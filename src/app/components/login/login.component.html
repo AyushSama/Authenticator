@@ -1,58 +1,56 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
-  <div class="mt-20">
-    <div class="text-3xl font-bold text-center mb-6">Log in</div>
-    <form class="" [formGroup]="form">
-      <div class="mb-4">
-        <input
-          class="w-96 px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Email"
-          formControlName="Email"
-        />
-        <div
-          class="text-red-500 text-sm mt-1"
-          *ngIf="
-            hasDisplayableError('Email') &&
-            form.controls['userName'].hasError('required')
-          "
-        >
-          Please enter a correct Email
+    <div class="mt-20">
+      <div class="text-3xl font-bold text-center mb-6">Log in</div>
+      <form (ngSubmit)="handleLogin()">
+        <div class="mb-4">
+          <input
+            class="w-96 px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Email"
+            [(ngModel)]="email"
+            name="email"
+            required
+          />
+          <div
+            class="text-red-500 text-sm mt-1"
+            *ngIf="!email && submitted"
+          >
+            Please enter a correct Email
+          </div>
         </div>
-      </div>
-
-      <div class="mb-4">
-        <input
-          type="password"
-          class="w-96 px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Password"
-          formControlName="password"
-        />
-        <div
-          class="text-red-500 text-sm mt-1"
-          *ngIf="
-            hasDisplayableError('password') &&
-            form.controls['password'].hasError('required')
-          "
-        >
-          Please enter a correct password
+  
+        <div class="mb-4">
+          <input
+            type="password"
+            class="w-96 px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Password"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+          <div
+            class="text-red-500 text-sm mt-1"
+            *ngIf="!password && submitted"
+          >
+            Please enter a correct password
+          </div>
         </div>
-      </div>
-
-      <!-- Submit Button -->
-      <div class="mt-6">
-        <button
-        
-          (click)="handleLogin()"
-          class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
-        >
-          Sign in
-        </button>
-      </div>
-      <br />
-      <div class="flex justify-center">
-      <button class="hover:text-red-700" [routerLink]="['/signup']">
-        New User
-      </button>
+  
+        <!-- Submit Button -->
+        <div class="mt-6">
+          <button
+            type="submit"
+            class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+          >
+            Sign in
+          </button>
+        </div>
+        <br />
+        <div class="flex justify-center">
+          <button class="hover:text-red-700" [routerLink]="['/signup']">
+            New User
+          </button>
+        </div>
+      </form>
     </div>
-    </form>
   </div>
-</div>
+  
