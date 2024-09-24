@@ -34,6 +34,13 @@
             Please enter a correct password
           </div>
         </div>
+
+        <div *ngIf="showCaptcha">
+          <re-captcha
+            (resolved)="onCaptchaResolved($event)"
+            siteKey={{siteKey}}>
+          </re-captcha>
+        </div>
   
         <!-- Submit Button -->
         <div class="mt-6">

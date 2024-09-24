@@ -1,0 +1,58 @@
+<div class="header">
+  <div class="flex justify-end p-4 bg-gray-100">
+    <button
+      class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-blue-500"
+      (click)="openHistory()"
+    >
+      History
+    </button>
+    &nbsp; &nbsp;
+    <button (click)="handleLogout()"
+      class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-blue-500"
+      routerLinkActive="routerLinkActive"
+    >
+      Logout
+    </button>
+  </div>
+
+  <div
+    *ngIf="openModal"
+    class="scroll-m-24 inset-0 flex items-center justify-center z-50"
+  >
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+      <h2 class="text-2xl font-bold mb-4">Login History</h2>
+
+      <table class="min-w-full bg-white">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border">History Id</th>
+            <th class="py-2 px-4 border">Request IP</th>
+            <th class="py-2 px-4 border">Timestamp</th>
+            <th class="py-2 px-4 border">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let history of historyData">
+            <td class="py-2 px-4 border">{{ history.userId }}</td>
+            <td class="py-2 px-4 border">{{ history.requestIP }}</td>
+            <td class="py-2 px-4 border">
+              {{ history.timestamp | date : "short" }}
+            </td>
+            <td class="py-2 px-4 border">
+              {{ history.status ? "Success" : "Failed" }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="mt-4 text-right">
+        <button
+          class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600"
+          (click)="closeHistory()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

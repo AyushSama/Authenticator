@@ -1,5 +1,5 @@
 import { endpoint } from './../endpoints/endpoints';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { User } from '../interfaces/User';
@@ -24,6 +24,18 @@ export class ApiService {
   postUser(user:User){
     try {
       return this.http.post(this.baseApiUrl+endpoint.postUser ,user);
+    } catch (error) {
+      throw new Error();
+    }
+  }
+
+  getHistory(){
+    try {
+      const token = localStorage.getItem('token'); 
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}` // Add Bearer token
+      });
+      return this.http.get(this.baseApiUrl+endpoint.getHistory,{headers});
     } catch (error) {
       throw new Error();
     }
