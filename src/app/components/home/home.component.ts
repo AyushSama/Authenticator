@@ -13,7 +13,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
 
   openModal: boolean = false;
@@ -24,12 +24,8 @@ export class HomeComponent implements OnInit {
     private apiService: ApiService
   ) {}
 
-  ngOnInit(): void {
-      this.getHistory();
-  }
-
   openHistory(): void {
-    this.openModal = true;
+    this.getHistory();
   }
  
   closeHistory(): void {
@@ -51,8 +47,12 @@ export class HomeComponent implements OnInit {
         next: (res: any) => {
           console.log(res);
           this.historyData = res;
+          this.openModal = true;
         },
         error: (error: HttpErrorResponse) => {
+          alert("Token has been hampered!!");
+          localStorage.removeItem('token');
+          this.route.navigate(['/login']);
           console.log(error);
         },
       });

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { InactivityService } from '../../services/inactivity.service';
 
 @Component({
   selector: 'app-login',
@@ -15,17 +16,23 @@ import { RecaptchaModule } from 'ng-recaptcha';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
-  showCaptcha: boolean = false;
-  siteKey: string = environment.captchaSiteKey;
-  captchaResponse: string | null = null;
+export class LoginComponent implements OnInit {
 
   constructor(
     public formbuilder: FormBuilder,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private inactivity : InactivityService
   ) {}
-
+  
+  showCaptcha: boolean = false;
+  siteKey: string = environment.captchaSiteKey;
+  captchaResponse: string | null = null;
+  
+  
+  ngOnInit(): void {
+      this.inactivity.startTrackingInactivity();
+  }
   email: string = '';
   password: string = '';
   submitted: boolean = false;
@@ -47,6 +54,11 @@ export class LoginComponent {
     this.captchaResponse = captchaResponse;
   }
 
+  handleNewUser(){
+    this.router.navigate(['/signup']);
+  }
+
+
   loginUser(email: string, password: string) {
     const params = new HttpParams()
       .set('email', email)
@@ -57,6 +69,7 @@ export class LoginComponent {
       .subscribe({
         next: (res: any) => {
           localStorage.setItem('token', res.token);
+          document.cookie = `token=${res.token}`;
           this.router.navigate(['/home']);
         },
         error: (error: HttpErrorResponse) => {
