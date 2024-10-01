@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatTabsModule} from '@angular/material/tabs';
+
 import { ApiService } from '../../service/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatButtonToggleModule],
+  imports: [MatTabsModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
