@@ -12,6 +12,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   baseApiUrl = environment.baseApiUrl;
+  baseHostUrl = environment.baseHostUrl;
 
   getUser(params : HttpParams){
     try {
@@ -36,6 +37,14 @@ export class ApiService {
         'Authorization': `Bearer ${token}` // Add Bearer token
       });
       return this.http.get(this.baseApiUrl+endpoint.getHistory,{headers});
+    } catch (error) {
+      throw new Error();
+    }
+  }
+
+  getNavButtons(){
+    try {
+      return this.http.get(this.baseHostUrl +endpoint.NavButtons);
     } catch (error) {
       throw new Error();
     }

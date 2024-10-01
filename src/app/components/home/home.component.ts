@@ -5,11 +5,12 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ApiService } from '../../service/api.service';
 import { HttpErrorResponse} from '@angular/common/http';
 import { Subject, takeUntil } from 'rxjs';
+import { NavbarComponent } from "../navbar/navbar.component";
  
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,RouterLink,RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive, NavbarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
