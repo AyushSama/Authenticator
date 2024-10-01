@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {MatSidenavModule} from '@angular/material/sidenav';
 import { ApiService } from '../../service/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar-content',
   standalone: true,
-  imports: [MatSidenavModule],
+  imports: [],
   templateUrl: './navbar-content.component.html',
   styleUrl: './navbar-content.component.css'
 })
@@ -16,6 +15,8 @@ export class NavbarContentComponent implements OnInit {
 
   isButton:boolean = false;
   content:string = "";
+  buttonContent:string = "";
+  buttonsFound:string[] = [];
 
   constructor(private apiService : ApiService){}
   
@@ -29,9 +30,12 @@ export class NavbarContentComponent implements OnInit {
     this.apiService.getNavButtonData(this.buttonLabel)
     .subscribe({
       next : (res : any) =>{
-        if(res.button)
+        if(res.button){
           this.isButton = true
-          this.content = res.message;
+          // this.buttonContent = res.button;
+          this.buttonsFound = res.button;
+        }
+        this.content = res.message;
       }, 
       error : (error: HttpErrorResponse)=>{
         console.log(error);
