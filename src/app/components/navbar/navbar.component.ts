@@ -3,11 +3,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 
 import { ApiService } from '../../service/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NavbarContentComponent } from "../navbar-content/navbar-content.component";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatTabsModule],
+  imports: [MatTabsModule, NavbarContentComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
