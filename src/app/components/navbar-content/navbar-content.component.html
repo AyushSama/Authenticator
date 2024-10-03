@@ -3,10 +3,10 @@
   <div class="buttons w-96">
     @for (button of buttonsFound; track $index) {
       @if(isLt && (button.value==2 || button.value==3)){
-        <div><button (click)="handleButtons(button.value)" class="">{{button.key}}</button></div>
+        <div class="but"><button class="w-full bg-gray-400 h-12" (click)="handleButtons(button.value)" >{{button.key}}</button></div>
       }
       @else if(!isLt && (button.value==0 || button.value==1)){
-        <div><button (click)="handleButtons(button.value)" class="">{{button.key}}</button></div>
+        <div class="but"><button class="w-full bg-gray-400 h-12" (click)="handleButtons(button.value)" >{{button.key}}</button></div>
       }
      }
   </div>
