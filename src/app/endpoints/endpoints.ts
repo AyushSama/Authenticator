@@ -22,12 +22,9 @@ export const endpoint = {
     EmptyRecycleBin: "emptyRecycleBin",
     PublishCustomReport: "publishCustomReport",
     DomainLevelOptOut: "domainLevelOptOut",
-    LDAPAccounts: "ldapAccounts",
+    LDAPAccounts: "lDAPAccounts",
     PhishingControl: "phishingControl",
-    LTDepartmentUserManagement: "ltDepartmentUserManagement",
-    LTInitialSetup: "ltInitialSetup",
+    LTDepartmentUserManagement: "lTDepartmentUserManagement",
+    LTInitialSetup: "lTInitialSetup",
     ActivityDirectorySetup: "activityDirectorySetup",
-
-
-
 };

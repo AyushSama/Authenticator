@@ -58,4 +58,12 @@ export class ApiService {
     }
   }
 
+  getButtonData(endpoint:string){
+    try {
+      return this.http.get(this.baseHostUrl+endpoint);
+    } catch (error) {
+      throw new Error();
+    }
+  }
+
 }
