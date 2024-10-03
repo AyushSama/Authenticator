@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
 
   navButtons:string[] = [];
 
-  constructor(private apiService : ApiService){}
+  constructor(private readonly apiService : ApiService){}
 
   ngOnInit(): void {
       this.getButtons();

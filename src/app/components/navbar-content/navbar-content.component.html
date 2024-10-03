@@ -2,7 +2,12 @@
   @if (isButton) {
   <div class="buttons w-96">
     @for (button of buttonsFound; track $index) {
-        <div><button>{{button}}</button></div>
+      @if(isLt && (button.value==2 || button.value==3)){
+        <div><button (click)="handleButtons(button.value)" class="">{{button.key}}</button></div>
+      }
+      @else if(!isLt && (button.value==0 || button.value==1)){
+        <div><button (click)="handleButtons(button.value)" class="">{{button.key}}</button></div>
+      }
      }
   </div>
   }

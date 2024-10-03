@@ -16,9 +16,10 @@ export class NavbarContentComponent implements OnInit {
   isButton:boolean = false;
   content:string = "";
   buttonContent:string = "";
-  buttonsFound:string[] = [];
+  buttonsFound:any = [];
+  isLt:boolean = false;
 
-  constructor(private apiService : ApiService){}
+  constructor(private readonly apiService : ApiService){}
   
   ngOnInit(): void {
     this.buttonLabel = this.buttonLabel.replace(/\s+/g, '');
@@ -34,6 +35,7 @@ export class NavbarContentComponent implements OnInit {
           this.isButton = true
           // this.buttonContent = res.button;
           this.buttonsFound = res.button;
+          console.log(this.buttonsFound);
         }
         this.content = res.message;
       }, 
@@ -41,6 +43,15 @@ export class NavbarContentComponent implements OnInit {
         console.log(error);
       }
     })
+  }
+
+  handleButtons(value:number){
+    if(value==1){
+      this.isLt = true;
+    }
+    else if(value==3){
+      this.isLt = false;
+    }
   }
 
 }
