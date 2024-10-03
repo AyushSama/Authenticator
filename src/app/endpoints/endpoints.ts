@@ -9,4 +9,25 @@ export const endpoint = {
     ManageAccountDetails : "manageAccountDetails",
     LoginPageText: "loginPageText",
     NavButtons : "getNavButtons",
+    AccountSummary: "accountSummary",
+    LoginDetails : "loginDetails",
+    SpecialCaseParticipantsList : "specialCaseParticipantsList",
+    DistributionDetails: "distributionDetails",
+    ClientList: "clientList",
+    TimeZoneDetails:"timeZoneDetails",
+    GetSurveyDetails: "getSurveyDetails",
+    EditSplashScreen: "editSplashScreen",
+    EditReleaseBannerText: "editReleaseBannerText",
+    UnlockAccount: "unlockAccount",
+    EmptyRecycleBin: "emptyRecycleBin",
+    PublishCustomReport: "publishCustomReport",
+    DomainLevelOptOut: "domainLevelOptOut",
+    LDAPAccounts: "ldapAccounts",
+    PhishingControl: "phishingControl",
+    LTDepartmentUserManagement: "ltDepartmentUserManagement",
+    LTInitialSetup: "ltInitialSetup",
+    ActivityDirectorySetup: "activityDirectorySetup",
+
+
+
 };
