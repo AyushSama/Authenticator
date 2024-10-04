@@ -26,7 +26,7 @@ export class InactivityService {
   }
 
   private handleLogout() {
-    localStorage.removeItem('token')
-    this.router.navigate(['/login']);
+    // localStorage.removeItem('token')
+    // this.router.navigate(['/login']);
   }
 }

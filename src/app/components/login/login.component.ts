@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
       this.inactivity.startTrackingInactivity();
   }
-  email: string = '';
+  username: string = '';
   password: string = '';
   submitted: boolean = false;
   grecaptcha: any;
@@ -47,7 +47,8 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.submitted = true; // Mark the form as submitted
-    this.loginUser(this.email, this.password);
+    this.authenticateUser(this.username,this.password);
+    // this.loginUser(this.email, this.password);
   }
 
   onCaptchaResolved(captchaResponse: string | null) {
@@ -56,6 +57,25 @@ export class LoginComponent implements OnInit {
 
   handleNewUser(){
     this.router.navigate(['/signup']);
+  }
+
+  authenticateUser(username: string, password: string){
+    const params = new HttpParams()
+      .set('username', username)
+      .set('password', password);
+    this.apiService
+      .authenticateUser(params)
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe({
+        next: (res: any) => {
+          if(res)
+            this.router.navigate(['/home']);
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error);
+          alert("Wrong User!");
+        },
+      });
   }
 
 

@@ -22,6 +22,14 @@ export class ApiService {
     }
   }
 
+  authenticateUser(params : HttpParams){
+    try {
+      return this.http.get(this.baseHostUrl+endpoint.authenticateUser ,{params});
+    } catch (error) {
+      throw new Error();
+    }
+  }
+
   postUser(user:User){
     try {
       return this.http.post(this.baseApiUrl+endpoint.postUser ,user);

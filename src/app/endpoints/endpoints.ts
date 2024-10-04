@@ -15,6 +15,8 @@ export const endpoint = {
     DistributionDetails: "distributionDetails",
     ClientList: "clientList",
     TimeZoneDetails:"timeZoneDetails",
+
+    
     GetSurveyDetails: "getSurveyDetails",
     EditSplashScreen: "editSplashScreen",
     EditReleaseBannerText: "editReleaseBannerText",
@@ -27,4 +29,8 @@ export const endpoint = {
     LTDepartmentUserManagement: "lTDepartmentUserManagement",
     LTInitialSetup: "lTInitialSetup",
     ActivityDirectorySetup: "activityDirectorySetup",
+
+
+
+    authenticateUser:'login'
 };
