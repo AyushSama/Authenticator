@@ -4,6 +4,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ApiService } from '../../service/api.service';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { NavbarContentComponent } from "../navbar-content/navbar-content.component";
+import { Menu } from '../../interfaces/Menu';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ import { NavbarContentComponent } from "../navbar-content/navbar-content.compone
 })
 export class NavbarComponent implements OnInit {
 
-  navButtons:any[] = [];
+  navButtons:Menu[] = [];
 
   constructor(private readonly apiService : ApiService){}
 
