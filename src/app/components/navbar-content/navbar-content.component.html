@@ -1,11 +1,9 @@
 <div class="contentLayout flex">
   <div class="buttons w-48">
     @for (button of buttonsFound; track $index) {
-    <div class="but">
-      <button class="w-full bg-gray-400 p-3" (click)="handleButtons(button)">
+      <button class="w-full but" (click)="handleButtons(button)">
         {{ button.menuName }}
       </button>
-    </div>
     }
   </div>
 </div>
