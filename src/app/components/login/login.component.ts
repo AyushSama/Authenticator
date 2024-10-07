@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
     }
     this.submitted = true; // Mark the form as submitted
     this.authenticateUser(this.username,this.password);
-    // this.loginUser(this.email, this.password);
   }
 
   onCaptchaResolved(captchaResponse: string | null) {
@@ -68,6 +67,7 @@ export class LoginComponent implements OnInit {
       .pipe(takeUntil(this._onDestroy))
       .subscribe({
         next: (res: any) => {
+          console.log(res);
           if(res)
             this.router.navigate(['/home']);
         },
@@ -76,31 +76,6 @@ export class LoginComponent implements OnInit {
           alert("Wrong User!");
         },
       });
-  }
 
-
-  loginUser(email: string, password: string) {
-    const params = new HttpParams()
-      .set('email', email)
-      .set('password', password);
-    this.apiService
-      .getUser(params)
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe({
-        next: (res: any) => {
-          localStorage.setItem('token', res.token);
-          document.cookie = `token=${res.token}`;
-          this.router.navigate(['/home']);
-        },
-        error: (error: HttpErrorResponse) => {
-          console.log(error);
-          if (error.status === 429) {
-            this.showCaptcha = true;
-            console.log(
-              'Too many failed attempts. Show CAPTCHA or block further attempts.'
-            );
-          }
-        },
-      });
   }
 }

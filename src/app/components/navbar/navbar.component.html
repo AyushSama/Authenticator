@@ -1,7 +1,7 @@
 <div class="flex justify-center">
     <mat-tab-group class="w-full">
         @for (button of navButtons; track $index) {
-                <mat-tab label="{{button}}">
+                <mat-tab label="{{button.menuName}}">
                     <app-navbar-content [buttonLabel]="button" ></app-navbar-content>
                 </mat-tab>
         }

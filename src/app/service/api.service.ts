@@ -14,25 +14,9 @@ export class ApiService {
   baseApiUrl = environment.baseApiUrl;
   baseHostUrl = environment.baseHostUrl;
 
-  getUser(params : HttpParams){
-    try {
-      return this.http.get(this.baseApiUrl+endpoint.getUser ,{params});
-    } catch (error) {
-      throw new Error();
-    }
-  }
-
   authenticateUser(params : HttpParams){
     try {
       return this.http.get(this.baseHostUrl+endpoint.authenticateUser ,{params});
-    } catch (error) {
-      throw new Error();
-    }
-  }
-
-  postUser(user:User){
-    try {
-      return this.http.post(this.baseApiUrl+endpoint.postUser ,user);
     } catch (error) {
       throw new Error();
     }
@@ -50,25 +34,9 @@ export class ApiService {
     }
   }
 
-  getNavButtons(){
+  getNavButtons(param : HttpParams){
     try {
-      return this.http.get(this.baseHostUrl +endpoint.NavButtons);
-    } catch (error) {
-      throw new Error();
-    }
-  }
-
-  getNavButtonData(endpoint:string){
-    try {
-      return this.http.get(this.baseHostUrl+endpoint);
-    } catch (error) {
-      throw new Error();
-    }
-  }
-
-  getButtonData(endpoint:string){
-    try {
-      return this.http.get(this.baseHostUrl+endpoint);
+      return this.http.get(this.baseHostUrl +endpoint.getMenu , {params : param});
     } catch (error) {
       throw new Error();
     }

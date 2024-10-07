@@ -22,25 +22,6 @@ export class NavbarContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.buttonLabel = this.buttonLabel.replace(/\s+/g, '');
-    this.getContent();
-  }
-
-  getContent() {
-    console.log('here');
-    this.apiService.getNavButtonData(this.buttonLabel).subscribe({
-      next: (res: any) => {
-        if (res.button) {
-          this.isButton = true;
-          // this.buttonContent = res.button;
-          this.buttonsFound = res.button;
-          console.log(this.buttonsFound);
-        }
-        this.content = res.message;
-      },
-      error: (error: HttpErrorResponse) => {
-        console.log(error);
-      },
-    });
   }
 
   handleButtons(button: any) {
@@ -51,14 +32,6 @@ export class NavbarContentComponent implements OnInit {
     } else {
         let route = button.key.replace(/\s+/g, '').replace('-','').replace('+','');
         route = route.charAt(0).toLowerCase() + route.slice(1);
-      this.apiService.getButtonData(route).subscribe({
-        next: (res: any) => {
-          this.content = res.message;
-        },
-        error: (error: HttpErrorResponse) => {
-          console.log(error);
-        },
-      });
     }
   }
 }

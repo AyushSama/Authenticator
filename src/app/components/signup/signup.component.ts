@@ -32,23 +32,7 @@ export class SignupComponent {
         createdDate: new Date() // Add createdDate
       };
       console.log(user);
-      this.signUpUser(user);
     }
-  }
-
-  signUpUser(user:User){
-    this.apiService
-      .postUser(user)
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe({
-        next: (res: any) => {
-          console.log(res);
-          this.router.navigate(['/login']);
-        },
-        error: (error: HttpErrorResponse) => {
-          console.log(error);
-        },
-      });
   }
 
 

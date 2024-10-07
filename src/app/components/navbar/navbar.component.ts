@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
 
 import { ApiService } from '../../service/api.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { NavbarContentComponent } from "../navbar-content/navbar-content.component";
 
 @Component({
@@ -14,7 +14,7 @@ import { NavbarContentComponent } from "../navbar-content/navbar-content.compone
 })
 export class NavbarComponent implements OnInit {
 
-  navButtons:string[] = [];
+  navButtons:any[] = [];
 
   constructor(private readonly apiService : ApiService){}
 
@@ -23,7 +23,8 @@ export class NavbarComponent implements OnInit {
   }
 
   getButtons(){
-    this.apiService.getNavButtons()
+    const param = new HttpParams().append("parentId" , 0);
+    this.apiService.getNavButtons(param)
     .subscribe({
       next : (res : any) =>{
         console.log(res);
