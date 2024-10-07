@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from '../../service/api.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Menu } from '../../interfaces/Menu';
 
 @Component({
   selector: 'app-navbar-content',
@@ -10,28 +11,32 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './navbar-content.component.css',
 })
 export class NavbarContentComponent implements OnInit {
-  @Input() buttonLabel!: string;
-
-  isButton: boolean = false;
-  content: string = '';
-  buttonContent: string = '';
-  buttonsFound: any = [];
+  @Input() menuId!: number;
+  buttonsFound!: Menu[];
   isLt: boolean = false;
-
+  
   constructor(private readonly apiService: ApiService) {}
-
+  
   ngOnInit(): void {
-    this.buttonLabel = this.buttonLabel.replace(/\s+/g, '');
+      this.getNavButtons();
   }
 
-  handleButtons(button: any) {
-    if (button.value == 1) {
-      this.isLt = true;
-    } else if (button.value == 3) {
-      this.isLt = false;
-    } else {
-        let route = button.key.replace(/\s+/g, '').replace('-','').replace('+','');
-        route = route.charAt(0).toLowerCase() + route.slice(1);
-    }
+  getNavButtons(){
+    const param = new HttpParams().append("parentId" , this.menuId);
+    this.apiService.getNavButtons(param)
+    .subscribe({
+      next : (res : Menu[]) =>{
+        console.log(res);
+        this.buttonsFound = res;
+      }, 
+      error : (error: HttpErrorResponse)=>{
+        console.log(error);
+      }
+    })
   }
+
+
+  handleButtons(temp : any){
+  }
+
 }

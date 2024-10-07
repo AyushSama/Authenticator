@@ -1,15 +1,16 @@
 <div class="contentLayout flex">
-  @if (isButton) {
-  <div class="buttons w-96">
+  <div class="buttons w-48">
     @for (button of buttonsFound; track $index) {
-      @if(isLt && (button.value==2 || button.value==3)){
-        <div class="but"><button class="w-full bg-gray-400 h-12" (click)="handleButtons(button)" >{{button.key}}</button></div>
-      }
-      @else if(!isLt && (button.value==0 || button.value==1)){
-        <div class="but"><button class="w-full bg-gray-400 h-12" (click)="handleButtons(button)" >{{button.key}}</button></div>
-      }
-     }
+    <div class="but">
+      <button class="w-full bg-gray-400 p-3" (click)="handleButtons(button)">
+        {{ button.menuName }}
+      </button>
+    </div>
+    <div class="but">
+      <button class="w-full bg-gray-400 p-3" (click)="handleButtons(button)">
+        {{ button.menuName }}
+      </button>
+    </div>
+    }
   </div>
-  }
-  <div class="content">{{ content }}</div>
 </div>
