@@ -18,16 +18,18 @@ export class NavbarContentComponent implements OnInit {
   constructor(private readonly apiService: ApiService) {}
   
   ngOnInit(): void {
-      this.getNavButtons();
+      this.getNavButtons(this.menuId);
   }
 
-  getNavButtons(){
-    const param = new HttpParams().append("parentId" , this.menuId);
+  getNavButtons(id:number){
+    const param = new HttpParams().append("parentId" , id);
     this.apiService.getNavButtons(param)
     .subscribe({
       next : (res : Menu[]) =>{
-        console.log(res);
-        this.buttonsFound = res;
+        if(res.length!=0){
+          console.log(res);
+          this.buttonsFound = res;
+        }
       }, 
       error : (error: HttpErrorResponse)=>{
         console.log(error);
@@ -36,7 +38,10 @@ export class NavbarContentComponent implements OnInit {
   }
 
 
-  handleButtons(temp : any){
+  handleButtons(button : Menu){
+    if(button.menuId == 26)
+        button.menuId = 5;
+    this.getNavButtons(button.menuId);
   }
 
 }
