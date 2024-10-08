@@ -1,10 +1,16 @@
-<div class="contentLayout flex">
-    <div class="buttons w-48">
+<div class="contentLayout flex outer border-2">
+  <div class=" flex">
+    <div class="buttons w-[400px] border-purple-950">
       @for (button of buttonsFound; track $index) {
-        <button class="w-full but">
-          {{ button.menuName }}
-        </button>
+      <button class="but w-48" (click)="showLoginDetails(button)">
+        {{ button.menuName }}
+      </button>
+      }
+    </div>
+    <div>
+      @if (showLoginbool) {
+        <app-logindetails></app-logindetails>
       }
     </div>
   </div>
-  
+</div>

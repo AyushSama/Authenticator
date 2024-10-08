@@ -1,0 +1,162 @@
+<div>
+  <div class="main">
+    <div class="middle-div">
+      <!-- <div class="headerr">
+        <img src="https://districtadministration.com/wp-content/uploads/2018/12/Copy-of-k12-insight-logo.jpg"
+          width="200px" height="50px" alt="Logo" />
+        <span>
+          <b> ADMIN REPORT MANAGER</b>
+        </span>
+      </div> -->
+
+      <div class="dropdowns">
+        <div class="acc-type">
+          <b>Accout Type</b>
+          <select name="" id="acctype" [(ngModel)]="selectedAccountType">
+            <option value="">All</option>
+            <option value="1,4,5">External</option>
+            <option value="2">Managed</option>
+            <option value="3">Internal</option>
+          </select>
+        </div>
+        <!-- account type dd -->
+        <div class="products">
+          <b>Products</b>
+          <select name="" id="prod" [(ngModel)]="selectedProductType">
+            <option value="">All</option>
+            <option value="en">Zarca-Engage</option>
+            <option value="kt">K12-Engage</option>
+            <option value="lt">K12-Let's Talk!</option>
+            <option value="lt">K12-Engage + Let's Talk!</option>
+          </select>
+        </div>
+      </div>
+      <br />
+      <br />
+
+      <div class="date-range-picker">
+        <div>
+          <b>From: &nbsp;&nbsp;</b>
+          <select id="from-date" [(ngModel)]="fromMonth">
+            <option *ngFor="let month of months" [value]="month">
+              {{ month }}
+            </option>
+          </select>
+
+          <b>&nbsp;-&nbsp;</b>
+          <select id="from-day" [(ngModel)]="fromDay">
+            <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+          </select>
+          <b>&nbsp;-&nbsp;</b>
+          <select id="from-year" [(ngModel)]="fromYear">
+            <option *ngFor="let year of years" [value]="year">
+              {{ year }}
+            </option>
+          </select>
+        </div>
+        <!-- from div -->
+        <div>
+          <b>To:&nbsp;&nbsp;</b>
+          <select id="to-date" [(ngModel)]="toMonth">
+            <option *ngFor="let month of months" [value]="month">
+              {{ month }}
+            </option>
+          </select>
+          <b>&nbsp;-&nbsp;</b>
+          <select id="to-day" [(ngModel)]="toDay">
+            <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+          </select>
+          <b>&nbsp;-&nbsp;</b>
+          <select id="to-year" [(ngModel)]="toYear">
+            <option *ngFor="let year of years" [value]="year">
+              {{ year }}
+            </option>
+          </select>
+        </div>
+        <br /><br />
+        <!-- to div -->
+      </div>
+
+      <button mat-fab extended (click)="fetchData()" class="genreport">
+        GENERATE REPORT
+      </button>
+    </div>
+  </div>
+</div>
+
+@if(clickedOnGen){
+<!-- DETAILS TABLE COMPONENT -->
+<div class="main">
+  <div class="middle-div">
+    <div class="datesDisplay">
+      <b>
+        From Date: {{ fromMonth }} {{ fromDay }}, {{ fromYear }} - To Date:
+        {{ toMonth }} {{ toDay }}, {{ toYear }}
+      </b>
+    </div>
+
+    <div class="input-row">
+      <div class="dropdown-div">
+        <b>Status:</b>
+        <select id="report-status" [(ngModel)]="status" (change)="changed()">
+          <option value="All">ALL</option>
+          <option value="true">SUCCESSFUL</option>
+          <option value="false">FAILED</option>
+        </select>
+      </div>
+      <div class="search-container">
+        <div class="text-inp">
+          <b class="search-text">Search by IP or Login ID:</b>
+          <input type="text" id="search" placeholder="Enter IP or Login ID" [(ngModel)]="searchTerm"
+            (input)="searchchange()" />
+        </div>
+        <div class="search-btn">
+          <button mat-fab extended (click)="fetchData()" class="search-div">
+            SEARCH
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="table-div">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Columns definition -->
+        <ng-container matColumnDef="Login_Id">
+          <th mat-header-cell *matHeaderCellDef>Login ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.loginId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Login_Date">
+          <th mat-header-cell *matHeaderCellDef>Login Date</th>
+          <td mat-cell *matCellDef="let element">{{ element.loginDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="IP_Address">
+          <th mat-header-cell *matHeaderCellDef>IP Address</th>
+          <td mat-cell *matCellDef="let element">{{ element.ipAddress }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Logon_Status">
+          <th mat-header-cell *matHeaderCellDef>Logon_Status</th>
+          <td mat-cell *matCellDef="let element">{{ element.logonStatus }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Master_Login">
+          <th mat-header-cell *matHeaderCellDef>Master_Login</th>
+          <td mat-cell *matCellDef="let element">{{ element.masterLogin }}</td>
+        </ng-container>
+
+        <!-- Add other columns here -->
+
+        <!-- Header and row -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator [disabled]="isLoadingResults" [length]="totalRecords" [pageSize]="pageSize"
+        (page)="onPageChange($event)" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+    </div>
+  </div>
+</div>
+}

@@ -2,11 +2,12 @@ import { Component, Input, OnInit} from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Menu } from '../../interfaces/Menu';
+import { LogindetailsComponent } from '../logindetails/logindetails.component';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [],
+  imports: [LogindetailsComponent],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
@@ -27,7 +28,7 @@ export class ReportsComponent implements OnInit {
     .subscribe({
       next : (res : Menu[]) =>{
         if(res.length!=0){
-          console.log(res);
+          console.log("Nav ",res);
           this.buttonsFound = res;
         }
       }, 
@@ -35,5 +36,11 @@ export class ReportsComponent implements OnInit {
         console.log(error);
       }
     })
+  }
+  showLoginbool=false;
+  showLoginDetails(button:any){
+    if(button.menuId==8){
+      this.showLoginbool=true;
+    }
   }
 }
