@@ -1,15 +1,15 @@
+import { ReportsComponent } from './../reports/reports.component';
 import { Component, OnInit } from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
-
 import { ApiService } from '../../service/api.service';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { NavbarContentComponent } from "../navbar-content/navbar-content.component";
 import { Menu } from '../../interfaces/Menu';
+import { ManageaccountdetailsComponent } from "../manageaccountdetails/manageaccountdetails.component";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatTabsModule, NavbarContentComponent],
+  imports: [MatTabsModule, ReportsComponent, ManageaccountdetailsComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

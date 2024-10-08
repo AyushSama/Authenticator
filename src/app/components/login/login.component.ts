@@ -7,7 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
 import { RecaptchaModule } from 'ng-recaptcha';
-import { InactivityService } from '../../services/inactivity.service';
+import { InactivityService } from '../../service/inactivity.service';
 
 @Component({
   selector: 'app-login',
@@ -76,6 +76,7 @@ export class LoginComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
+          this.showCaptcha = true;
           alert("Wrong User!");
         },
       });

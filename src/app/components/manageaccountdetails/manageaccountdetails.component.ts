@@ -1,16 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Menu } from '../../interfaces/Menu';
 
 @Component({
-  selector: 'app-navbar-content',
+  selector: 'app-manageaccountdetails',
   standalone: true,
   imports: [],
-  templateUrl: './navbar-content.component.html',
-  styleUrl: './navbar-content.component.css',
+  templateUrl: './manageaccountdetails.component.html',
+  styleUrl: './manageaccountdetails.component.css'
 })
-export class NavbarContentComponent implements OnInit {
+export class ManageaccountdetailsComponent implements OnInit {
   @Input() menuId!: number;
   buttonsFound!: Menu[];
   isLt: boolean = false;
@@ -43,5 +43,4 @@ export class NavbarContentComponent implements OnInit {
         button.menuId = 5;
     this.getNavButtons(button.menuId);
   }
-
 }
