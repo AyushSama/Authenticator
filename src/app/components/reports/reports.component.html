@@ -1,10 +1,11 @@
 <div class="contentLayout flex">
-    <div class="buttons w-48">
+    <div class="flex w-72 h-[400px] flex-wrap">
       @for (button of buttonsFound; track $index) {
-        <button class="w-full but">
+        <button class="but" (click)="loadComponent(button.menuName)">
           {{ button.menuName }}
         </button>
       }
     </div>
+    <div class="componentdiv" #componentDiv></div>
   </div>
   
