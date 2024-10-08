@@ -1,0 +1,102 @@
+<div class="flex items-center justify-between bg-gray-100 p-4 px-5 border-b">
+
+  <div class="flex items-center">
+    <input type="text" [disabled]="!isDataLoaded" autocomplete="off" placeholder="Search Feature"
+      [(ngModel)]="searchFeature" (ngModelChange)="searchFeatures()"
+      class="p-2 border rounded-lg focus:outline-none focus:ring" />
+
+  </div>
+
+  <div class="flex items-center space-x-4">
+    <div class="flex items-center">
+      <label for="access" class="mr-2 text-gray-600 font-bold">Set Access Permissions for</label>
+      <div class="relative">
+        <input [(ngModel)]="searchTerm" (ngModelChange)="searchUsers()" type="text" id="access"
+          class="p-2 border rounded focus:outline-none focus:ring" />
+        @if(modal){
+        <div class="absolute bg-white p-3 min-w-[200px] max-h-[200px] overflow-y-scroll">
+          <div *ngFor="let user of searchData, let i=index">
+            <button (click)="fetchFeatures(user['corporate_no'])">
+              <p class="border-b-2 border-solid border-black">{{user['corporate_id']}}</p>
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="text-gray-600">
+      Account Type: <span class="font-semibold">{{accountType}}</span>
+    </div>
+  </div>
+</div>
+<div>
+
+  <div>
+    <table class="mx-auto w-[90%] mt-4 font-serif">
+      <thead>
+        <tr class="bg-black text-white">
+          <th class="w-[5%] py-2 text-center">No.</th>
+          <th class="w-[65%] py-2 text-center border-l-2 border-r-2 border-gray-200">Advanced Features</th>
+          <th class="w-[20%] py-2 text-center">Access</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if(!loading){
+        <tr *ngFor="let feature of featureExracted; let i=index" class="border-2 mb-6 p-4 shadow-lg bg-white rounded-lg"
+          [ngClass]="{'hidden': !feature.isShow}">
+          <td class="text-center shadow-lg mb-6 p-4">{{i+1}}</td>
+          <td class="border-l-2 border-r-2 border-gray-200 shadow-lgpl-5 mb-6 p-4">{{feature.featureName}}</td>
+          <td class="text-center shadow-lg mb-6 p-4">
+            @if (feature.valueType=="Boolean") {
+            @if(feature.featureValue==1){
+            <input (change)="changePermissionCheckbox(i, 'checked')" type="checkbox" checked />
+            }@else {
+            <input (change)="changePermissionCheckbox(i, 'unchecked')" type="checkbox" />
+            }
+            }@else{
+            <input (change)="changePermission($event, i)"
+              class="text-center w-52 border-[1px] border-solid border-black" type="number"
+              [value]="feature.featureValue" />
+            }
+          </td>
+        </tr>
+        <tr *ngIf="accountType!=''">
+          <td colspan="3">
+            <div class="flex items-center mt-2 justify-center">
+              <button [ngClass]="{'btndisable': isButtonVisible}" [disabled]="!isBtnDisable" class="p-2 px-5 text-center border rounded-lg bg-black text-white btndisable" (click)="updatePermission()">Submit</button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+
+    @if(loading){
+    <div class="flex flex-col items-center justify-center min-h-screen">
+      <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500 border-solid border-opacity-50 mb-6">
+      </div>
+      <h2 class="text-green-300">Loading Data, please wait...</h2>
+    </div>
+    }
+  </div>
+</div>
+
+
+@if(message=="Success"){
+
+<div class="overlay"></div>
+<div class="fixed bottom-[50%] right-[35%] bg-green-500 rounded popup w-80 h-30 text-center">
+  <div class="flex items-center justify-center">
+    <p class="text-white px-3 py-4 font-serif text-lg">Successfully updated Permissions</p>
+  </div>
+</div>
+} @else if (message=="Fail") {
+
+<div class="overlay"></div>
+<div class="fixed bottom-[50%] right-[35%] rounded bg-red-500 popup w-80 h-30 text-center">
+  <div class="flex items-center justify-center">
+    <p class="text-white px-5 py-4 font-serif text-lg">Something Went Wrong</p>
+  </div>
+</div>
+}
