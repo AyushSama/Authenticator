@@ -61,7 +61,7 @@ export class ApiService {
   }
 
   getCorporateIds(product:number, account_type:number[]): Observable<any> {
-    return this.http.get(`${this.surveyUrl}/corporate-ids`, {params:{
+    return this.http.get(`${this.surveyUrl}/corporate-ids?`, {params:{
       Account_Type:account_type,
       ProductId:product
     }});
