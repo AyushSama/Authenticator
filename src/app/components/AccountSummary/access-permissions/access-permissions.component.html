@@ -1,0 +1,197 @@
+<div *ngIf="selectedAccount != ''">
+  <div class="container">
+    <div class="top-div">
+      <div class="client-info">
+        <table class="info-table">
+          <label for="dropdown"><strong>Set Access Permissions for</strong></label>
+          <select id="account" [(ngModel)]="selectedAccount" (change)="onAccountChange($event)">
+            <ng-container *ngFor="let account of accounts">
+              <option *ngIf="account.corporateId" [value]="account.corporateId">
+                {{ account.corporateId }}
+              </option>
+            </ng-container>
+          </select>
+
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Client ID</strong></td>
+            <td>{{ corporateData?.corporate_id }} <span>created on  </span> <strong>{{ corporateData?.ms_date | date:'short' }}</strong></td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Name</strong></td>
+            <td>{{ corporateData?.first_name }} {{ corporateData?.last_name }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Company</strong></td>
+            <td>{{ corporateData?.corporate_name || 'N/A' }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Job Title</strong></td>
+            <td>{{ corporateData?.job_title || 'N/A' }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Email</strong></td>
+            <td>{{ corporateData?.email_address }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Address</strong></td>
+            <td>{{ corporateData?.address || 'N/A' }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>City</strong></td>
+            <td>{{ corporateData?.city || 'N/A' }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>State</strong></td>
+            <td>{{ corporateData?.state || 'N/A' }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Zip Code</strong></td>
+            <td>{{ corporateData?.pincode || 'N/A' }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Country</strong></td>
+            <td>{{ corporateData?.country || 'N/A' }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Phone</strong></td>
+            <td>{{ corporateData?.telephone || 'N/A' }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Zarca Contact</strong></td>
+            <td>{{ corporateData?.zarca_Contact || 'N/A' }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Account Expiry Date</strong></td>
+            <td>{{ corporateData?.expires_On | date:'short' }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Exceeding survey quota requires authorization?</strong></td>
+            <td>{{ corporateData?.newSurveyAuthorization ? 'Yes' : 'No' }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Account Type</strong></td>
+            <td>{{ corporateData?.account_type }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>Sub Account Type</strong></td>
+            <td>{{ corporateData?.sub_account_type }}</td>
+          </tr>
+          <tr *ngIf="corporateData; else noCorporateData">
+            <td><strong>IP Address</strong></td>
+            <td>{{ corporateData?.ip_address }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Account Summary Section -->
+      <div class="account-summary">
+        <h4 class="bg-slate-400 flex justify-center items-center font-extrabold ">Account Summary</h4>
+        <table class="summary-table">
+          <tr>
+            <td><strong>Surveys requested</strong></td>
+            <td>{{surveyData.surveysCreated}}</td>
+          </tr>
+          <tr>
+            <td><strong>Surveys allotted</strong></td>
+            <td>{{surveyData.surveysAlloted}}</td>
+          </tr>
+          <tr>
+            <td><strong>Surveys currently active</strong></td>
+            <td>{{ apiResponse.data[0].table2.current}}</td>
+          </tr>
+          <tr>
+            <td><strong>Expired surveys</strong></td>
+            <td>{{ apiResponse.data[0].table3.expired }}</td>
+          </tr>
+          <tr>
+            <td><strong>Deleted surveys</strong></td>
+            <td>{{surveyData.surveysDeleted}}</td>
+          </tr>
+          <tr>
+            <td><strong>Balance surveys</strong></td>
+            <td>{{surveyData.surveysAlloted - surveyData.surveysCreated}}</td>
+          </tr>
+          <tr>
+            <td><strong>Email Invitations</strong></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Total Email Invitations allowed</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Total Email Invitations sent</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Balance Email Invitations</td>
+            <td>-1</td>
+          </tr>
+          <tr>
+            <td><strong>Responses Summary</strong></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Responses allowed</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Responses in database</td>
+            <td>{{ apiResponse.data[0].table1.totalRes }}</td>
+          </tr>
+          <tr>
+            <td>Responses deleted</td>
+            <td>{{deletedData.deletedResponses}}</td>
+          </tr>
+          <tr>
+            <td>Responses received</td>
+            <td>{{ apiResponse.data[0].table1.totalRes + deletedData.deletedResponses}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="bottom-div">
+      <h4 class="bg-slate-400 flex justify-center items-center font-extrabold">Survey Summary</h4>
+      <table class="survey-summary">
+        <thead>
+          <tr>
+            <th>Creation Date</th>
+            <th>Survey ID</th>
+            <th>Survey Duration</th>
+            <th>Distribution Sent</th>
+            <th>Start Date/End Date</th>
+            <th>Survey Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="corporateData">
+            <ng-container *ngIf="corporateData.table7s ; else noSurveyData">
+              <tr *ngFor="let survey of corporateData.table7s">
+                <td>{{ survey.activateDate | date:'short' }}</td>
+                <td>{{ survey.title }}</td>
+                <td>{{ survey.duration }} minutes</td>
+                <td>{{ survey.distributionNo }}</td>
+                <td>{{ survey.startDate | date:'short' }} / {{ survey.endDate | date:'short' }}</td>
+                <td>{{ survey.isRecycled ? 'Recycled' : 'Active' }}</td>
+              </tr>
+            </ng-container>
+          </ng-container>
+          <!-- Template for no survey data -->
+          <ng-template #noSurveyData>
+            <tr>
+              <td colspan="6" class="text-center">No Surveys Available</td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Template for no corporate data -->
+    <ng-template #noCorporateData>
+      <tr>
+        <td colspan="2">No Corporate Data Available</td>
+      </tr>
+    </ng-template>
+  </div>
+</div>

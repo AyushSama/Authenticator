@@ -1,10 +1,15 @@
 <div class="contentLayout flex">
-    <div class="buttons w-48">
-      @for (button of buttonsFound; track $index) {
-        <button class="w-full but">
-          {{ button.menuName }}
-        </button>
-      }
+  <!-- First div (buttons) with fixed width of 25% -->
+  <div class="buttons fixed-section">
+    <div *ngFor="let button of buttonsFound; let i = index">
+      <button class="w-full but" (click)="accountType(button)">
+        {{ button.menuName }}
+      </button>
     </div>
   </div>
-  
+
+  <!-- Second div (data) takes 75% of the screen -->
+  <div class="content-section" *ngIf="genrateData !== ''">
+    <app-reportsdata></app-reportsdata>
+  </div>
+</div>

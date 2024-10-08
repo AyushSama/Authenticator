@@ -5,11 +5,12 @@ import { ApiService } from '../../service/api.service';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Menu } from '../../interfaces/Menu';
 import { ManageaccountdetailsComponent } from "../manageaccountdetails/manageaccountdetails.component";
+import { ReportsdataComponent } from '../AccountSummary/reportsdata/reportsdata.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatTabsModule, ReportsComponent, ManageaccountdetailsComponent],
+  imports: [MatTabsModule, ReportsComponent, ManageaccountdetailsComponent,ReportsdataComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
