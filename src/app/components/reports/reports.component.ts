@@ -9,17 +9,18 @@ import {
 import { ApiService } from '../../service/api.service';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Menu } from '../../interfaces/Menu';
+import { DistributiondetailsComponent } from '../distributiondetails/distributiondetails.component';
+import { CommonModule } from '@angular/common';
 import { SCPLComponent } from '../scpl/scpl.component';
 import { ReportsdataComponent } from '../AccountSummary/reportsdata/reportsdata.component';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { ClientlistComponent } from '../clientlist/clientlist.component';
 import { LogindetailsComponent } from '../logindetails/logindetails.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [ReportsdataComponent, LogindetailsComponent, CommonModule, SCPLComponent,ClientlistComponent],
+  imports: [DistributiondetailsComponent,ReportsdataComponent, LogindetailsComponent, CommonModule, SCPLComponent,ClientlistComponent],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css',
 })
@@ -68,6 +69,9 @@ export class ReportsComponent implements OnInit {
       this.generateData='clientList';
     }else if(this.menuId==4 && button.menuId==9 ){
       this.generateData='scpl';
+    }
+    else if(this.menuId==4 && button.menuId==10){
+      this.generateData='dd';
     }
     else{
       this.generateData='';

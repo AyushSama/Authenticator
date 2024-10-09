@@ -1,0 +1,131 @@
+<div>
+    <div class="ml-5 mr-[20px] w-[1040px] text-black mt-5">
+      <h6 class="text-3xl font text-center mb-8 bg-blue-500 text-white p-3">Distribution Details</h6>
+    
+      <div class="flex flex-col px-4 py-8 justify-center items-center">
+   
+        <div class="" *ngIf="selectedReportType === 'Distribution Details'">
+          <div class="flex flex-col space-y-4 mt-8">
+            <div class="flex">
+              <div class="mr-2">
+                <label class="">Account Type:</label>
+                <select [(ngModel)]="accountType" class="ml-1  border-[1px] border-black">
+                  <option value="All">All</option>
+                  <option value="External">External</option>
+                  <option value="Managed">Managed</option>
+                  <option value="Internal">Internal</option>
+                </select>
+              </div>
+              <div class="ml-5">
+                <label class="">Product:</label>
+                <select [(ngModel)]="product" class="ml-1 border-[1px] border-black  ">
+                  <option value="All">All</option>
+                  <option value="Zarca Engage">Zarca Engage</option>
+                  <option value="K12 Engage">K12 Engage</option>
+                  <option value="K12 Let's Talk!">K12 Let's Talk!</option>
+                  <option value="K12 Engage + Let's Talk!">K12 Engage + Let's Talk!</option>
+                </select>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <label class="mr-2">Select Account:</label>
+              <select [(ngModel)]="selectedAccount" class="border-[1px] border-black  ">
+                <option *ngFor="let account of accounts" [value]="account.corporateNo">
+                  {{ account.corporateId }}
+                </option>
+              </select>
+            </div>
+            <div class="flex">
+              <div>
+                <label class="">From:</label>
+                <input type="date" [(ngModel)]="fromDate" class="">
+              </div>
+              <div>
+                <label class="ml-4 ">To:</label>
+                <input type="date" [(ngModel)]="toDate" class="">
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="flex justify-center">
+          <button class=" hover:bg-blue-600 bg-blue-500 text-white transition duration-300  px-4 py-2 rounded-md mt-8" (click)="generateReport()">Generate
+            Report</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="checkCondition;else elseBlock">
+    </div>
+    <ng-template #elseBlock>
+      <div class="container mx-auto px-4 py-8">
+        <h6 class="text-3xl font text-center mb-8">Report Details</h6>
+        <div class="flex flex-col mb-3  p-2">
+          <div class="flex items-center">
+            <span class="w-full">Total Emails Sent:</span>
+            <span class="w-52">{{ reportData['spCounts'][0].cnt }}</span>
+          </div>
+          <div class="flex items-center ">
+            <span class="w-full">Total Responses Received:</span>
+            <span class="w-52">{{ reportData['spCounts'][1].cnt }}</span>
+          </div>
+          <div class="flex items-center">
+            <span class="w-full">Reminders Sent:</span>
+            <span class="w-52">{{ reportData['spCounts'][2].cnt }}</span>
+          </div>
+        </div>
+      
+
+        <table mat-table [dataSource]="reportData.spDists" class="mat-elevation-z8">
+    
+          <!-- Survey No Column -->
+          <ng-container matColumnDef="survey_no">
+            <th mat-header-cell *matHeaderCellDef> Survey No. </th>
+            <td mat-cell *matCellDef="let survey"> {{ survey.survey_no }} </td>
+          </ng-container>
+        
+          <!-- Survey Title Column -->
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Survey Title </th>
+            <td mat-cell *matCellDef="let survey"> {{ survey.title }} </td>
+          </ng-container>
+        
+          <!-- Total Emails Sent Column -->
+          <ng-container matColumnDef="tot">
+            <th mat-header-cell *matHeaderCellDef> Total Emails Sent </th>
+            <td mat-cell *matCellDef="let survey"> {{ survey.tot }} </td>
+          </ng-container>
+        
+          <!-- Emails Read Column -->
+          <ng-container matColumnDef="emails_read">
+            <th mat-header-cell *matHeaderCellDef> Emails Read </th>
+            <td mat-cell *matCellDef="let survey; let i = index"> {{ reportData.spReads[i]?.tot }} </td>
+          </ng-container>
+        
+          <!-- Total Responses Received Column -->
+          <ng-container matColumnDef="responses_received">
+            <th mat-header-cell *matHeaderCellDef> Total Responses Received </th>
+            <td mat-cell *matCellDef="let survey; let i = index"> {{ reportData.spResponses[i]?.tot }} </td>
+          </ng-container>
+        
+          <!-- Reminders Sent Column -->
+          <ng-container matColumnDef="reminders_sent">
+            <th mat-header-cell *matHeaderCellDef> Reminders Sent </th>
+            <td mat-cell *matCellDef="let survey; let i = index"> {{ reportData.spReminders[i]?.tot }} </td>
+          </ng-container>
+        
+          <!-- Last Email Sent Column -->
+          <ng-container matColumnDef="last_email_sent">
+            <th mat-header-cell *matHeaderCellDef> Last Email Sent </th>
+            <td mat-cell *matCellDef="let survey; let i = index"> {{ reportData.spMaxDistDates[i]?.maxdate }} </td>
+          </ng-container>
+        
+          <!-- Header and Row Declarations -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+        </table>     
+      </div>
+    </ng-template>
+
+</div>

@@ -4,6 +4,8 @@
     width: 370px;
     height: 50px;
  }
+<<<<<<< HEAD
+=======
 
  .contentLayout {
     display: flex;
@@ -22,3 +24,4 @@
     padding-left: 1rem;
     margin-right: 30px; /* Optional: Adds some spacing between the two sections */
   }
+>>>>>>> master
