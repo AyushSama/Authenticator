@@ -1,0 +1,160 @@
+.middle-div {
+  border: 1px solid black;
+  // width: 80%;
+  min-height: 280px;
+  border-radius: 4px;
+  margin:20px 30px
+}
+.main {
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.headerr {
+  background-color: midnightblue;
+  color: white;
+  font-size: 20px;
+  height: 40px;
+  padding: 20px;
+  letter-spacing: 3px;
+  margin: 10px;
+  display: flex;
+}
+.dropdowns {
+  justify-content: center;
+  display: flex;
+  gap: 50px;
+  font-size: 20px;
+  margin-top: 30px;
+}
+.acc-type select {
+  width: 150px;
+  height: 40px;
+  font-size: 16px;
+  padding: 5px;
+  margin-left: 10px;
+}
+.products select {
+  width: 150px;
+  height: 30px;
+  font-size: 16px;
+  padding: 5px;
+  margin-left: 10px;
+}
+.date-range-picker {
+  margin-left: 20px;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  font-size: 16px;
+}
+.date-range-picker select {
+  width: 100px;
+  height: 30px;
+}
+ button {
+  background-color: midnightblue;
+  color: white;
+  letter-spacing: 2px;
+ 
+}
+button{
+    margin-left: 330px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+button:hover {
+  transform: scale(1.1);
+  background-color: green;
+}
+span{
+    margin-left: 20px;
+    padding: 10px;
+ 
+}
+
+
+.datesDisplay{
+    margin-left: 200px;
+    margin-top: 15px;
+    font-size: large;
+}
+.spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+  width: 600px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.dropdown-div{
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  align-items: center;
+}
+.report-status{
+  text-align: center;
+}
+.dropdown-div b, .text-inp b {
+  margin-bottom: 10px;
+}
+.text-inp {
+  display: flex;
+  flex-direction: column;
+  // width: 300px;
+}
+
+.search-container{
+  display: flex;
+  
+}
+.search-div {
+  margin-left: 20px;
+  height: 30px;
+  // align-self:self-end;
+}
+.search-btn{
+  // border: 2px solid black;
+  height: 50px;
+  align-self: flex-end;
+}
+input[type="text"], select {
+  padding: 4px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 50%;
+  box-sizing: border-box;
+}
+#search{
+  width: 100%;
+  height: 32px;
+}
+
+button.mat-fab {
+  background-color: #6200ea;
+  color: white;
+  padding: 10px 20px;
+}
+
+button.mat-fab:hover {
+  background-color: #5e35b1;
+  cursor: pointer;
+}
+
+.table-div{
+  margin:50px
+}
+
+
