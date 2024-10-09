@@ -2,6 +2,7 @@
     <mat-tab-group class="w-full">
         @for (button of navButtons; track $index) {
             <mat-tab label="{{button.menuName}}">
+                <ng-template matTabContent>
                     @if(button.menuId==2){
                         <app-premium-service></app-premium-service>
                     }
@@ -10,7 +11,8 @@
                     }
                     @if(button.menuId == 5){
                         <app-manageaccountdetails [menuId]="button.menuId"></app-manageaccountdetails>
-                    }
+                    }   
+                </ng-template>
                 </mat-tab>
         }
     </mat-tab-group>

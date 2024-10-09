@@ -15,6 +15,7 @@ export class ApiService {
 
   baseApiUrl = environment.baseApiUrl;
   baseHostUrl = environment.baseHostUrl;
+  corpDataUrl = environment.corpData;
 
   authenticateUser(params : HttpParams){
     try {
@@ -45,7 +46,7 @@ export class ApiService {
   }
 
   getAllUsers():Observable<any>{
-    return this.http.get<any>(`${this.baseHostUrl}api/MsSurCorp/list`);
+    return this.http.get<any>(this.corpDataUrl);
   }
 
   fetchUserFeatures(corporate_no:number):Observable<any>{
@@ -69,5 +70,25 @@ export class ApiService {
       features:featureExracted
     }
     return this.http.post(`${this.baseHostUrl}api/UserCustomFeature/insertupdate`, data);
+  }
+  getAccounts(): Observable<string> {
+    return this.http.get<string>(`https://localhost:44383/api/Users/corporate-ids?accountType=1`);
+  }
+  reportData: any;
+  requestData: any;
+  DataToApi(corpNo: number, startDate: Date, endDate: Date, accountType: string, lang: string) {
+    this.reportData = {
+      corpNo: corpNo,
+      startDate: startDate,
+      endDate: endDate,
+      accountType: accountType,
+      lang: lang
+    }
+  }
+
+  sendDataToApi() {
+    return this.http.post('https://localhost:44383/api/Users/run-report',
+      this.reportData
+    );
   }
 }

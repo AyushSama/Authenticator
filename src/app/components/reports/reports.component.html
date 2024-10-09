@@ -1,10 +1,16 @@
 <div class="contentLayout flex">
     <div class="buttons w-48">
       @for (button of buttonsFound; track $index) {
-        <button class="w-full but">
+        <button class="w-full but" (click)="showDetails(button.menuId)">
           {{ button.menuName }}
         </button>
       }
     </div>
-  </div>
-  
+   
+    <div class="ml-44">
+        @if(dd){
+          <app-distributiondetails>
+          </app-distributiondetails>
+        }
+    </div>
+</div>
