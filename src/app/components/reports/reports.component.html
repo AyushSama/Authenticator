@@ -9,7 +9,10 @@
   </div>
 
   <!-- Second div (data) takes 75% of the screen -->
-  <div class="content-section" *ngIf="genrateData !== ''">
+  <div class="content-section" *ngIf="genrateData == 'showAccountSummaryComponent'">
     <app-reportsdata></app-reportsdata>
+  </div>
+  <div class="content-section" *ngIf="genrateData == 'scpl'">
+    <app-scpl></app-scpl>
   </div>
 </div>
