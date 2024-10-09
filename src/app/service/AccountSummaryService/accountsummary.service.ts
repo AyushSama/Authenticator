@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class AccountsummaryService {
   private apiUrl: string = 'https://localhost:44316/api/PKG_ProductMaster/corporate-ids';
   private apiUrl2: string = 'https://localhost:44316/api/MsSurveyCorporate';
+  private apiUrl3: string = 'https://localhost:44316/api/Survey';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -21,6 +22,11 @@ export class AccountsummaryService {
     return this.http.get<any>(`${this.apiUrl2}/getbyid?id=${id}`);
   }
 
+  totalInvitationsSent(corpId: number): Observable<any>{
+    const url = `${this.apiUrl3}/survey-count/${corpId}`;
+    return this.http.get<any>(url);
+
+  }
   
   getActivatorCorpDetails(corporate_no: number, AccountType: string, lang: string): Observable<any> {
     const url = `https://localhost:44316/api/ProcGetActivatorCorpDetails/list?corporate_no=${corporate_no}&AccountType=${AccountType}&lang=${lang}`;

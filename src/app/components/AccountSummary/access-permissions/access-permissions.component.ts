@@ -80,7 +80,7 @@ export class AccessPermissionsComponent implements OnInit {
   corporateNo: number = 2708;
   accountType: number = 0;
   product: number = 0;
-
+  totalInvitaion: number = 0;
   apiResponse: CorporateApiResponse;
 
   constructor(private apiService: AccountsummaryService) {
@@ -142,6 +142,7 @@ export class AccessPermissionsComponent implements OnInit {
           this.generateReport(this.corporateNo);
           this.generateSurveyData(this.corporateNo);
           this.generateSurveyDataForDeleted(this.corporateNo);
+          this.totalSendInvitations(this.corporateNo);
         } else {
           console.error('No data found for the selected corporate ID.');
         }
@@ -170,6 +171,17 @@ export class AccessPermissionsComponent implements OnInit {
         console.error("Error fetching survey data:", error);
       }
     );
+  }
+
+
+  totalSendInvitations(corpNo: number){
+    this.apiService.totalInvitationsSent(corpNo).subscribe(
+      (response)=>{
+        this.totalInvitaion = response;
+        console.log(this.totalInvitaion);
+      }
+    );
+
   }
 
   generateReport(corpNo: number): void {
