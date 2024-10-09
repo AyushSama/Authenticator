@@ -86,4 +86,31 @@ export class ApiService {
     return this.http.get<any>("https://localhost:44316/api/GetClientListData/list", { params });
   }
 
+  getAllUsers():Observable<any>{
+    return this.http.get<any>(`${this.baseHostUrl}api/MsSurCorp/list`);
+  }
+
+  fetchUserFeatures(corporate_no:number):Observable<any>{
+    const data ={
+      corporate_no:corporate_no
+    }
+    return this.http.get<any>(`${this.baseHostUrl}api/GetUserPackageMapping/list`, {params: data});
+  }
+
+  getUserAccountType(corporate_no:number):Observable<any>{
+    const data ={
+      corporate_no:corporate_no
+    }
+    return this.http.post<any>(`${this.baseHostUrl}api/getAccountType/search`, data);
+  }
+
+  updateUserPermission(corporate_no : number, featureExracted:any){
+    const data = {
+      flag: 0,
+      corporate_no:corporate_no,
+      features:featureExracted
+    }
+    return this.http.post(`${this.baseHostUrl}api/UserCustomFeature/insertupdate`, data);
+  }
+
 }
