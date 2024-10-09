@@ -1,18 +1,22 @@
-<div class="contentLayout flex">
-  <!-- First div (buttons) with fixed width of 25% -->
-  <div class="buttons fixed-section">
-    <div *ngFor="let button of buttonsFound; let i = index">
-      <button class="w-full but" (click)="accountType(button)">
+<div class="contentLayout flex outer border-2">
+  <div class=" flex">
+    <div class="buttons w-[400px] border-purple-950">
+      @for (button of buttonsFound; track $index) {
+      <button class="but w-48" (click)="showLoginDetails(button)">
         {{ button.menuName }}
       </button>
+      }
     </div>
-  </div>
-
-  <!-- Second div (data) takes 75% of the screen -->
-  <div class="content-section" *ngIf="genrateData == 'showAccountSummaryComponent'">
-    <app-reportsdata></app-reportsdata>
-  </div>
-  <div class="content-section" *ngIf="genrateData == 'scpl'">
-    <app-scpl></app-scpl>
+    <div>
+      @if (generateData=='AccountSummary') {
+        <app-reportsdata></app-reportsdata>
+      }
+      @if(generateData=='LoginDetails'){
+        <app-logindetails></app-logindetails>
+      }
+      @if(generateData=='scpl'){
+        <app-scpl></app-scpl>
+      }
+    </div>
   </div>
 </div>
