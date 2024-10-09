@@ -18,6 +18,7 @@ export class ManageaccountdetailsComponent implements OnInit {
   constructor(private readonly apiService: ApiService) {}
   
   ngOnInit(): void {
+    console.log("manager");
       this.getNavButtons(this.menuId);
   }
 

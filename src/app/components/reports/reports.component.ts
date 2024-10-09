@@ -26,6 +26,7 @@ export class ReportsComponent implements OnInit {
   clientList:boolean = false;
   
   ngOnInit(): void {
+    console.log("report");
       this.getNavButtons(this.menuId);
   }
 
