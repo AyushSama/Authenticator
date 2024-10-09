@@ -18,14 +18,14 @@ export class ReportsComponent implements OnInit {
   @Input() menuId!: number;
   buttonsFound!: Menu[];
   isLt: boolean = false;
-  genrateData: boolean = false;
+  generateData: string = '';
   
   constructor(private readonly apiService: ApiService, private router : Router) {}
   
   ngOnInit(): void {
     console.log("report");
       this.getNavButtons(this.menuId);
-      this.showLoginbool=false;
+      // this.showLoginbool=false;
   }
 
   getNavButtons(id:number){
@@ -43,17 +43,16 @@ export class ReportsComponent implements OnInit {
       }
     })
   }
-  showLoginbool=false;
+  
   showLoginDetails(button:any){
-    if(this.menuId==4 && button.menuId==8 ){
-      this.showLoginbool=true;
+    if(this.menuId==4 && button.menuId==7 ){
+      this.generateData='AccountSummary';
     }
-    else if(this.menuId==4 && button.menuId==7 ){
-      this.genrateData=true;
+    else if(this.menuId==4 && button.menuId==8 ){
+      this.generateData='LoginDetails';
     }
     else{
-      this.showLoginbool=false;
-      this.genrateData=false;
+      this.generateData='';
     }
   }
 }

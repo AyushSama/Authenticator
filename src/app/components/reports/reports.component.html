@@ -8,7 +8,10 @@
       }
     </div>
     <div>
-      @if (showLoginbool) {
+      @if (generateData=='AccountSummary') {
+        <app-reportsdata></app-reportsdata>
+      }
+      @if(generateData=='LoginDetails'){
         <app-logindetails></app-logindetails>
       }
     </div>
