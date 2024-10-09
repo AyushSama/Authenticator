@@ -39,8 +39,8 @@ export class SCPLComponent implements OnInit {
 
   loadCorporateIds(product: string, account_type: string) {
     this.acc = account_type.split(',').map(Number);
-    if (product == '') {
-      this.prod = 0;
+    if (product == "") {
+      this.prod = 5;
     } else if (product == 'en') {
       this.prod = 1;
     } else if (product == 'kt') {
@@ -49,9 +49,10 @@ export class SCPLComponent implements OnInit {
       this.prod = 3;
     } else if (product == '4') {
       this.prod = 4;
-    } else {
-      this.prod = 5;
-    }
+    } 
+    // else {
+    //   this.prod = 5;
+    // }
 
     this.apiService.getCorporateIds(this.prod, this.acc).subscribe({
       next: (response: any) => {
