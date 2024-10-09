@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { AccountsummaryService } from '../../../service/AccountSummaryService/accountsummary.service';
+import { ApiService } from '../../../service/api.service';
+import { find } from 'rxjs';
 
 interface Table1 {
   total: number;
@@ -82,8 +84,10 @@ export class AccessPermissionsComponent implements OnInit {
   product: number = 0;
   totalInvitaion: number = 0;
   apiResponse: CorporateApiResponse;
-
-  constructor(private apiService: AccountsummaryService) {
+  totalInviteAllowed : string ='';
+  totalInviteAllowedNumber : number =0;
+  Array : any[]=[];
+  constructor(private apiService: AccountsummaryService, private api : ApiService) {
     this.apiResponse = {
       data: [
         {
@@ -143,6 +147,13 @@ export class AccessPermissionsComponent implements OnInit {
           this.generateSurveyData(this.corporateNo);
           this.generateSurveyDataForDeleted(this.corporateNo);
           this.totalSendInvitations(this.corporateNo);
+          this.api.fetchUserFeatures(this.corporateNo).subscribe((success : any)=>{
+            
+            this.Array= success.data;
+            this.Array=this.Array.filter(find=> find.featureName=="MaxInvitesAllowed");
+            this.totalInviteAllowed = this.Array[0].featureValue;
+            
+          });
         } else {
           console.error('No data found for the selected corporate ID.');
         }
@@ -158,14 +169,12 @@ export class AccessPermissionsComponent implements OnInit {
     this.apiService.getSurveyData(corpNo).subscribe(
       (response)=>{
         this.surveyData = response;
-        console.log("SurveyData",this.surveyData);
     });
   }
   generateSurveyDataForDeleted(corpNo: number): void {
     this.apiService.getSurveyDataForDeleted(corpNo).subscribe(
       (response) => {
         this.deletedData = response;
-        console.log("Survey Data:", this.surveyData);
       },
       (error) => {
         console.error("Error fetching survey data:", error);
@@ -178,7 +187,6 @@ export class AccessPermissionsComponent implements OnInit {
     this.apiService.totalInvitationsSent(corpNo).subscribe(
       (response)=>{
         this.totalInvitaion = response;
-        console.log(this.totalInvitaion);
       }
     );
 
@@ -193,9 +201,7 @@ export class AccessPermissionsComponent implements OnInit {
       .subscribe(
         (response) => {
           this.apiResponse = response;
-          console.log('Activator Corp Details:', this.apiResponse);
           this.corporateData.table7s = this.apiResponse.data[0].table7s;
-          console.log('Survey Data:', this.corporateData.table7s);
         },
         (error) => {
           console.error('Error fetching activator corp details:', error);
