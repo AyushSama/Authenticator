@@ -1,20 +1,25 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Menu } from '../../interfaces/Menu';
 import { LogindetailsComponent } from '../logindetails/logindetails.component';
 import { Router } from '@angular/router';
+import { SCPLComponent } from '../scpl/scpl.component';
 import { ReportsdataComponent } from '../AccountSummary/reportsdata/reportsdata.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [LogindetailsComponent,ReportsdataComponent,CommonModule],
+  imports: [LogindetailsComponent,ReportsdataComponent, CommonModule, SCPLComponent],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
 export class ReportsComponent implements OnInit {
+
+  @ViewChild('componentDiv', { read: ViewContainerRef, static: true })
+  componentDiv!: ViewContainerRef;
+  
   @Input() menuId!: number;
   buttonsFound!: Menu[];
   isLt: boolean = false;
@@ -25,7 +30,6 @@ export class ReportsComponent implements OnInit {
   ngOnInit(): void {
     console.log("report");
       this.getNavButtons(this.menuId);
-      // this.showLoginbool=false;
   }
 
   getNavButtons(id:number){
@@ -50,6 +54,9 @@ export class ReportsComponent implements OnInit {
     }
     else if(this.menuId==4 && button.menuId==8 ){
       this.generateData='LoginDetails';
+    }
+    else if(this.menuId==4 && button.menuId==9 ){
+      this.generateData='scpl';
     }
     else{
       this.generateData='';
