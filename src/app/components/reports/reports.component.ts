@@ -22,6 +22,7 @@ export class ReportsComponent implements OnInit {
   constructor(private readonly apiService: ApiService, private router : Router) {}
   
   ngOnInit(): void {
+    console.log("report");
       this.getNavButtons(this.menuId);
   }
 
