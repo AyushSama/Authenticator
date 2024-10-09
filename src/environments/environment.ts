@@ -5,5 +5,6 @@ export const environment = {
     corpData:'https://localhost:44316/api/MsSurveyCorporate/',
     baseHostUrl : "https://localhost:44316/",
     surveyUrl:"https://localhost:44316/api/Survey",
-    downloadExcel :"https://localhost:44316/api/GetSurveyData/download"
+    downloadExcel :"https://localhost:44316/api/GetSurveyData/download",
+    getReportData:'https://localhost:44383/api/Users/run-report'
 };

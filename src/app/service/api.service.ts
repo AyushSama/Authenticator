@@ -33,6 +33,7 @@ export class ApiService {
   corpDataUrl = environment.corpData;
     surveyUrl=environment.surveyUrl;
   downloadExcel = environment.downloadExcel;
+  getReportDataUrl=environment.getReportData;
 
   getRecordsApi(requestbody: any) {
     return this.http.post(
@@ -143,7 +144,7 @@ export class ApiService {
     return this.http.post(`${this.baseHostUrl}api/UserCustomFeature/insertupdate`, data);
   }
   getAccounts(): Observable<string> {
-    return this.http.get<string>(`https://localhost:44383/api/Users/corporate-ids?accountType=1`);
+    return this.http.get<string>(this.corpDataUrl);
   }
   reportData: any;
   requestData: any;
@@ -158,7 +159,7 @@ export class ApiService {
   }
 
   sendDataToApi() {
-    return this.http.post('https://localhost:44383/api/Users/run-report',
+    return this.http.post(this.getReportDataUrl,
       this.reportData
     );
   }
