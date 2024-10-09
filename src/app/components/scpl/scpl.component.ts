@@ -40,7 +40,7 @@ export class SCPLComponent implements OnInit {
   loadCorporateIds(product: string, account_type: string) {
     this.acc = account_type.split(',').map(Number);
     if (product == '') {
-      this.prod = 0;
+      this.prod = 5;
     } else if (product == 'en') {
       this.prod = 1;
     } else if (product == 'kt') {

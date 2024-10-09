@@ -25,14 +25,20 @@ export interface GetClientListDataSearchEntity {
   providedIn: 'root'
 })
 export class ApiService {
-
+  
   constructor(private http: HttpClient) { }
-
+  
   baseApiUrl = environment.baseApiUrl;
   baseHostUrl = environment.baseHostUrl;
-  surveyUrl=environment.surveyUrl;
+    surveyUrl=environment.surveyUrl;
   downloadExcel = environment.downloadExcel;
 
+  getRecordsApi(requestbody: any) {
+    return this.http.post(
+      'https://localhost:44316/api/LoginDetails/search',
+      requestbody
+    );
+  }
   authenticateUser(params : HttpParams){
     try {
       return this.http.get(this.baseHostUrl+endpoint.authenticateUser ,{params});
