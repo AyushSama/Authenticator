@@ -9,25 +9,26 @@
   </div>
 
   <!-- Second div (data) takes 75% of the screen -->
-  <div class="content-section" *ngIf="genrateData == 'showAccountSummaryComponent'">
+  <div
+    class="content-section"
+    *ngIf="genrateData == 'showAccountSummaryComponent'"
+  >
     <app-reportsdata></app-reportsdata>
   </div>
   <div class="content-section" *ngIf="genrateData == 'scpl'">
     <app-scpl></app-scpl>
   </div>
+
+  <div class="content-section" *ngIf="genrateData == 'clientList'">
+    <app-clientlist></app-clientlist>
+  </div>
 </div>
 
-    <div class="buttons w-48">
-      @for (button of buttonsFound; track $index) {
-        
-        <button class="but" (click)="loadComponent(button.menuName)">
-          {{ button.menuName }}
-        </button>
-      }
-    </div>
-    
 
-    <div class="componentdiv ml-48 w-px border" #componentDiv></div>
-</div>
 
-  
+
+
+
+
+
+
