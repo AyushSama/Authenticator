@@ -3,6 +3,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './auth.guard';
+import { ReportsdataComponent } from './components/AccountSummary/reportsdata/reportsdata.component';
 import { ClientlistComponent } from './components/clientlist/clientlist.component';
 import { ClientreportComponent } from './components/clientreport/clientreport.component';
 
@@ -23,6 +24,11 @@ export const routes: Routes = [
     {
         path : 'home',
         component : HomeComponent,
+        canActivate : [AuthGuard]
+    },
+    {
+        path : 'reportsdata',
+        component : ReportsdataComponent,
         canActivate : [AuthGuard]
     },
     

@@ -1,0 +1,89 @@
+<h4 class="report-title">Admin Report Manager</h4>
+
+<div class="report-container">
+  <div class="input-row">
+    <label for="acct-type" class="input-label">
+      Account Type:
+      <select
+        name="type"
+        [(ngModel)]="accountType"
+        (change)="onClick()"
+        id="acct-type"
+        class="input-select"
+      >
+        <option name="account" value="0">All</option>
+        <option name="account-ext" value="1,4,5" selected>External</option>
+        <option name="account-mang" value="2">Managed</option>
+        <option name="account-int" value="3">Internal</option>
+      </select>
+    </label>
+    <label for="product" class="input-label">
+      Product:
+      <select
+        name="product"
+        (change)="onClick()"
+        [(ngModel)]="product"
+        id="product"
+        class="input-select"
+      >
+        <option name="product-all" value="5">All</option>
+        <option name="product-ze" value="en">Zarca Engage</option>
+        <option name="product-k12e" value="kt">K12 Engage</option>
+        <option name="product-k12lt" value="1">K12 Let's Talk</option>
+        <option name="product-k12e+lt" value="4" selected>
+          K12 Engage + Let's Talk
+        </option>
+      </select>
+    </label>
+  </div>
+
+  <div class="input-row">
+    <label for="corporateId" class="input-label">
+      Corporate ID:
+      <select
+        [(ngModel)]="selectedCorporateNo"
+        (change)="onCorporateChange()"
+        name="corporateId"
+        id="corporateId"
+        class="input-select"
+      >
+        <option *ngFor="let corp of corporateIds" [value]="corp.corporate_No">
+          {{ corp.corporate_id }}
+        </option>
+      </select>
+    </label>
+  </div>
+
+  <div class="input-row">
+    <label for="view" class="input-label">
+      View:
+      <select name="view" id="view" class="input-select">
+        <option>All</option>
+        <option>semi anonymous</option>
+        <option>anonymous</option>
+      </select>
+    </label>
+    <label for="surveyDetails" class="input-label">
+      Survey Details:
+      <select
+        [(ngModel)]="selectSurveyNo"
+        name="surveyDetails"
+        id="surveyDetails"
+        class="input-select"
+      >
+        <option *ngFor="let detail of surveyDetails" [value]="detail.survey_no">
+          {{ detail.title }}
+        </option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<div class="button-container">
+  <button
+    class="generate-button"
+    (click)="genreport()"
+  >
+    Generate Report
+  </button>
+</div>

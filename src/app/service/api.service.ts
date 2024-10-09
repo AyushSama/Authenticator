@@ -30,6 +30,8 @@ export class ApiService {
 
   baseApiUrl = environment.baseApiUrl;
   baseHostUrl = environment.baseHostUrl;
+  surveyUrl=environment.surveyUrl;
+  downloadExcel = environment.downloadExcel;
 
   authenticateUser(params : HttpParams){
     try {
@@ -57,6 +59,27 @@ export class ApiService {
     } catch (error) {
       throw new Error();
     }
+  }
+
+  getSurveyDetailsByCorporateNo(corporate_no: number): Observable<any> {
+    console.log(corporate_no);
+    return this.http.get(`${this.surveyUrl}/details/${corporate_no}`);
+  }
+
+
+  downloadreport(report: any): Observable<Blob> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`${this.downloadExcel}`, report, {
+      headers,
+      responseType: 'blob',
+    });
+  }
+
+  getCorporateIds(product:number, account_type:number[]): Observable<any> {
+    return this.http.get(`${this.surveyUrl}/corporate-ids?`, {params:{
+      Account_Type:account_type,
+      ProductId:product
+    }});
   }
 
   private readonly reportDataSubject = new BehaviorSubject<any>({});
