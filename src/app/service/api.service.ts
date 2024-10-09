@@ -34,10 +34,11 @@ export class ApiService {
     surveyUrl=environment.surveyUrl;
   downloadExcel = environment.downloadExcel;
   getReportDataUrl=environment.getReportData;
+  accountsUrl=environment.accounts;
 
   getRecordsApi(requestbody: any) {
     return this.http.post(
-      'https://localhost:44316/api/LoginDetails/search',
+      'https://localhost:7178/api/LoginDetails/search',
       requestbody
     );
   }
@@ -114,7 +115,7 @@ export class ApiService {
       .set('StartIndex', searchModel.startIndex.toString())
       .set('PageSize', searchModel.pageSize.toString());
 
-    return this.http.get<any>("https://localhost:44316/api/GetClientListData/list", { params });
+    return this.http.get<any>("https://localhost:7178/api/GetClientListData/list", { params });
   }
 
   getAllUsers():Observable<any>{
@@ -143,8 +144,11 @@ export class ApiService {
     }
     return this.http.post(`${this.baseHostUrl}api/UserCustomFeature/insertupdate`, data);
   }
-  getAccounts(): Observable<string> {
-    return this.http.get<string>(this.corpDataUrl);
+  getAccounts(accountType:number,productId:number): Observable<string> {
+    return this.http.get<string>(this.accountsUrl,{ params :{
+      accountType:accountType,
+      productId:productId,
+    }});
   }
   reportData: any;
   requestData: any;
