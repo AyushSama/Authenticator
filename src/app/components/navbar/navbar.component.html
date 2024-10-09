@@ -1,7 +1,10 @@
 <div class="flex justify-center">
     <mat-tab-group class="w-full">
         @for (button of navButtons; track $index) {
-                <mat-tab label="{{button.menuName}}">
+            <mat-tab label="{{button.menuName}}">
+                    @if(button.menuId==2){
+                        <app-premium-service></app-premium-service>
+                    }
                     @if(button.menuId == 4){
                         <app-reports [menuId]="button.menuId"></app-reports>
                     }

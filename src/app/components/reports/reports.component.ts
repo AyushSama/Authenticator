@@ -4,11 +4,13 @@ import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Menu } from '../../interfaces/Menu';
 import { Router } from '@angular/router';
 import { SCPLComponent } from '../scpl/scpl.component';
+import { ReportsdataComponent } from '../AccountSummary/reportsdata/reportsdata.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [],
+  imports: [ReportsdataComponent, CommonModule, SCPLComponent],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
@@ -20,14 +22,12 @@ export class ReportsComponent implements OnInit {
   @Input() menuId!: number;
   buttonsFound!: Menu[];
   isLt: boolean = false;
+  genrateData: string = '';
   
-  constructor(
-    private readonly apiService: ApiService,
-    private router: Router,
-    private resolver: ComponentFactoryResolver,
-  ) {}
+  constructor(private readonly apiService: ApiService, private router : Router) {}
   
   ngOnInit(): void {
+    console.log("report");
       this.getNavButtons(this.menuId);
   }
 
@@ -47,13 +47,13 @@ export class ReportsComponent implements OnInit {
     })
   }
 
-  loadComponent(menuName: string) {
-    this.componentDiv.clear(); // Clear previously loaded components
-
-    if (menuName === 'Special Case Participants List') {
-      const factory = this.resolver.resolveComponentFactory(SCPLComponent);
-      this.componentDiv.createComponent(factory);
+  accountType(button:Menu ){
+    if(button.menuName=="Account Summary"){
+        this.genrateData='showAccountSummaryComponent';
+    }else if(button.menuName=="Special Case Participants List"){
+      this.genrateData='scpl';
+    }else{
+      this.genrateData='';
     }
-    // Add more conditions if needed for other components
   }
 }

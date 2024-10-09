@@ -1,0 +1,18 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 999; 
+  }
+  .popup{
+    z-index: 1000;
+  }
+  .btndisable {
+    background-color: rgb(87, 85, 85); 
+    cursor: not-allowed;    
+    opacity: 0.5;         
+  }
+  

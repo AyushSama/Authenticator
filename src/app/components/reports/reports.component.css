@@ -2,11 +2,24 @@
     border: 1px solid #999999;
     background-color: #dddddd;
     width: 370px;
+    height: 50px;
  }
 
- /* .componentdiv{
-    background-color: aqua;
-    border: dotted;
-    width: 1100px;
-    height: 500px;
- } */
+ .contentLayout {
+    display: flex;
+    width: 100%;
+  }
+  
+  .fixed-section {
+    width: 25%;
+    position: sticky; /* If you want it to be fixed on scroll */
+    top: 0;
+    
+  }
+  
+  .content-section {
+    width: 75%;
+    padding-left: 1rem;
+    margin-right: 30px; /* Optional: Adds some spacing between the two sections */
+  }
+  
