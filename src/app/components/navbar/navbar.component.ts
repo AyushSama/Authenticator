@@ -6,11 +6,13 @@ import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Menu } from '../../interfaces/Menu';
 import { ManageaccountdetailsComponent } from "../manageaccountdetails/manageaccountdetails.component";
 import { PremiumServiceComponent } from "../premium-service/premium-service.component";
+import { ReportsdataComponent } from '../AccountSummary/reportsdata/reportsdata.component';
+import { LoginpagetextComponent } from "../loginpagetext/loginpagetext.component";
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatTabsModule, ReportsComponent, ManageaccountdetailsComponent, PremiumServiceComponent
-  ],
+  imports: [MatTabsModule, ReportsComponent, ManageaccountdetailsComponent, PremiumServiceComponent, ReportsdataComponent, LoginpagetextComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

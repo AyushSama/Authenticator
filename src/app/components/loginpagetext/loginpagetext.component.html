@@ -1,0 +1,35 @@
+<!-- <p>login-page-text works!</p> -->
+<div class="contentLayout flex">
+    <div class="buttons w-48">
+      @for (button of buttonsFound; track $index) {
+      <button class="w-full but" (click)="handleButton()">
+        {{ button.menuName }}
+      </button>
+      }
+    </div>
+  </div>
+   
+  <div *ngIf="isModal">
+    &nbsp;
+    <div class="para">
+      <p>This text will be displayed randomly on Zarca login Page</p>
+    </div>
+   
+    <div *ngFor="let modal of textModal; let i = index" class="content">
+      <label [for]="'text'+ i">Text {{ i + 1 }}</label>
+      <textarea
+        [id]="'text' + i"
+        [name]="'text' + i"
+        rows="3"
+        cols="100"
+      ></textarea>
+    </div>
+    <button class="addmore" style="color: blue" (click)="AddText()">
+      <u>Add More...</u>
+    </button>
+    <div class="saveButton mb-72">
+      <button style="background-color: lightgray;border-radius: 3px; width: 60px;">Save</button>
+      &nbsp;
+      <button style="color: blueviolet;"><u>Cancel</u></button>
+    </div>
+  </div>
