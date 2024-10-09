@@ -20,6 +20,7 @@ export class ReportsComponent implements OnInit {
   
   ngOnInit(): void {
       this.getNavButtons(this.menuId);
+      this.showLoginbool=false;
   }
 
   getNavButtons(id:number){
@@ -39,8 +40,11 @@ export class ReportsComponent implements OnInit {
   }
   showLoginbool=false;
   showLoginDetails(button:any){
-    if(button.menuId==8){
+    if(this.menuId==4 && button.menuId==8 ){
       this.showLoginbool=true;
+    }
+    else{
+      this.showLoginbool=false;
     }
   }
 }
