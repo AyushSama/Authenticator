@@ -1,0 +1,58 @@
+
+<div class="flex flex-col align-midde justify-center items-center font-semibold text-red-500 p-4 bg-cyan-300">
+    <p>Account Type: {{ reportData.accountType }}</p>
+    <p>Sub Account Type: {{ reportData.subAccountType }}</p>
+    <p>Product: {{reportData.product}}</p>
+    <p>Account Status: {{reportData.accountStatus}}</p>
+    <p>User Type: {{reportData.userType}}</p>
+    <p>Country: {{reportData.country}}</p>
+    <p>Created Between: {{reportData.createdBetween.start | date:'MMM dd yyyy'}} and {{reportData.createdBetween.end | date:'MMM dd yyyy'}}</p>
+    <p>Expired Between: {{reportData.expiredBetween.start | date:'MMM dd yyyy'}} and {{reportData.expiredBetween.end | date:'MMM dd yyyy'}}</p>
+</div>
+
+@if(!isLoaded)
+{
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+}
+
+@if(isLoaded)
+ {
+  <table class="min-w-full bg-white border border-gray-200">
+    <thead>
+        <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+            <th class="py-3 px-6 text-left">Client Id</th>
+            <th class="py-3 px-6 text-left">Organization Name</th>
+            <th class="py-3 px-6 text-left">Created Date</th>
+            <th class="py-3 px-6 text-left">Expiry Date</th>
+            <th class="py-3 px-6 text-left">Email Address</th>
+            <th class="py-3 px-6 text-left">Acct Exec Email</th>
+            <th class="py-3 px-6 text-left">Last Login</th>
+            <th class="py-3 px-6 text-left">Product Type</th>
+        </tr>
+    </thead>
+    <tbody class="text-gray-600 text-sm font-light">
+        @for(client of clientList ;track client){
+            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                <td class="py-3 px-6">{{ client.corporate_id }}</td>
+                <td class="py-3 px-6">{{ client.corporate_name }}</td>
+                <td class="py-3 px-6">{{ client.createdDate }}</td>
+                <td class="py-3 px-6">{{ client.expiresOn }}</td>
+                <td class="py-3 px-6">{{ client.email_address }}</td>
+                <td class="py-3 px-6">{{ client.zarca_contact }}</td>
+                <td class="py-3 px-6">{{ client.lastLoginDate }}</td>
+                <td class="py-3 px-6">{{ client.productType }}</td>
+            </tr>
+        }
+    </tbody>
+</table>
+ 
+
+ }
+ 
+ <div class="flex justify-between mx-5 my-4">
+
+  <div class="p-2 border-neutral-400 bg-violet-600 hover:bg-violet-700 hover:scale-105 transition text-neutral-50 cursor-pointer rounded-md" (click)="prevPage()">Prev Page</div>
+  <div class="p-2 border-neutral-400 bg-orange-500 hover:bg-violet-700 hover:scale-105 transition text-neutral-50 cursor-pointer rounded-md" (click)="exportToExcel()">Export to Excel</div>
+  <div class="p-2 border-neutral-400 bg-violet-600 hover:bg-violet-700 hover:scale-105 transition text-neutral-50 cursor-pointer rounded-md" (click)="nextPage()">Next Page</div>
+ </div>

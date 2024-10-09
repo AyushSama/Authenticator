@@ -3,8 +3,23 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { User } from '../interfaces/User';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Menu } from '../interfaces/Menu';
+
+export interface GetClientListDataSearchEntity {
+  accountType: string;
+  productType: string;
+  acStatus: number;
+  uType: number;
+  country: string;
+  startDate: string;
+  endDate: string;
+  expiredStartDate: string;
+  expiredEndDate: string;
+  subAccountType: string;
+  startIndex: number;
+  pageSize: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +88,33 @@ export class ApiService {
     }});
   }
 
+  private readonly reportDataSubject = new BehaviorSubject<any>({});
+  reportData$ = this.reportDataSubject.asObservable();
+
+  updateReportData(data: any) {
+    this.reportDataSubject.next(data);
+  }
+
+
+
+  getClientList(searchModel: GetClientListDataSearchEntity): Observable<any> {
+    const params = new HttpParams()
+      .set('AccountType', searchModel.accountType)
+      .set('ProductType', searchModel.productType)
+      .set('AcStatus', searchModel.acStatus.toString())
+      .set('UType', searchModel.uType.toString())
+      .set('Country', searchModel.country)
+      .set('StartDate', searchModel.startDate.toString())
+      .set('EndDate', searchModel.endDate.toString())
+      .set('ExpiredStartDate', searchModel.expiredStartDate.toString())
+      .set('ExpiredEndDate', searchModel.expiredEndDate.toString())
+      .set('SubAccountType', searchModel.subAccountType)
+      .set('StartIndex', searchModel.startIndex.toString())
+      .set('PageSize', searchModel.pageSize.toString());
+
+    return this.http.get<any>("https://localhost:44316/api/GetClientListData/list", { params });
+  }
+
   getAllUsers():Observable<any>{
     return this.http.get<any>(`${this.baseHostUrl}api/MsSurCorp/list`);
   }
@@ -99,4 +141,5 @@ export class ApiService {
     }
     return this.http.post(`${this.baseHostUrl}api/UserCustomFeature/insertupdate`, data);
   }
+
 }
