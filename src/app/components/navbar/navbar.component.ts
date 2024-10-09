@@ -12,7 +12,6 @@ import { ReportsdataComponent } from '../AccountSummary/reportsdata/reportsdata.
   selector: 'app-navbar',
   standalone: true,
   imports: [MatTabsModule, ReportsComponent, ManageaccountdetailsComponent, PremiumServiceComponent,ReportsdataComponent],
-  
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
