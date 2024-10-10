@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Corporate } from '../../interfaces/Corporate';
 import { SurveyDetails } from '../../interfaces/SurveyDetails';
-import { MatDialogModule,MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../service/api.service';
-import { SortPipe } from "../../sort.pipe";
+import { SortPipe } from '../../sort.pipe';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,24 +15,23 @@ import { MatInput, MatInputModule } from '@angular/material/input';
   selector: 'app-scpl',
   standalone: true,
   imports: [
-    FormsModule, 
-    CommonModule, 
+    FormsModule,
+    CommonModule,
     SortPipe,
     MatSelectModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   templateUrl: './scpl.component.html',
-  styleUrl: './scpl.component.css'
+  styleUrl: './scpl.component.css',
 })
 export class SCPLComponent implements OnInit {
-
   corporateIds: Corporate[] = [];
   surveyDetails: SurveyDetails[] = [];
   selectedCorporateNo!: any;
   surveydetail!: SurveyDetails;
-  accountType: string = "";
+  accountType: string = '';
   product!: string;
   selectSurveyNo!: string;
 
@@ -41,10 +40,7 @@ export class SCPLComponent implements OnInit {
 
   downloadReport!: Report;
 
-  constructor(
-    
-    private apiService: ApiService
-  ) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.loadCorporateIds(this.product, this.accountType);
@@ -52,7 +48,7 @@ export class SCPLComponent implements OnInit {
 
   loadCorporateIds(product: string, account_type: string) {
     this.acc = account_type.split(',').map(Number);
-    if (product == "") {
+    if (product == '') {
       this.prod = 5;
     } else if (product == 'en') {
       this.prod = 1;
@@ -62,7 +58,7 @@ export class SCPLComponent implements OnInit {
       this.prod = 3;
     } else if (product == '4') {
       this.prod = 4;
-    } 
+    }
     // else {
     //   this.prod = 5;
     // }
@@ -84,7 +80,12 @@ export class SCPLComponent implements OnInit {
       .getSurveyDetailsByCorporateNo(this.selectedCorporateNo)
       .subscribe({
         next: (data) => {
-          this.surveyDetails = data;
+          if (data && data.length > 0) {
+            this.surveyDetails = data;
+          }else{
+            this.surveyDetails = [];
+            alert(`${this.selectedCorporateNo} ID has no Survey Filled.`)
+          }
         },
         error: (error) => {
           console.error('Error fetching survey details:', error);
@@ -115,10 +116,7 @@ export class SCPLComponent implements OnInit {
     });
   }
 
-  
-
   onClick() {
     this.loadCorporateIds(this.product, this.accountType);
   }
-
 }
