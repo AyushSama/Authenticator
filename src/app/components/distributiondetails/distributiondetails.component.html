@@ -1,5 +1,5 @@
-<div>
-    <div class="ml-5 mr-[20px] w-[1040px] text-black mt-5">
+<div class="w-[850px]">
+    <div class="ml-5 mr-[20px] text-black mt-5">
       <h6 class="text-3xl font text-center mb-8 bg-blue-500 text-white p-3">Distribution Details</h6>
     
       <div class="flex flex-col px-4 py-8 justify-center items-center">
@@ -9,7 +9,7 @@
             <div class="flex">
               <div class="mr-2">
                 <label class="">Account Type:</label>
-                <select [(ngModel)]="accountType" class="ml-1  border-[1px] border-black">
+                <select (change)="calluserdata()" [(ngModel)]="accountType" class="ml-1  border-[1px] border-black">
                   <option value="All">All</option>
                   <option value="External">External</option>
                   <option value="Managed">Managed</option>
@@ -18,7 +18,7 @@
               </div>
               <div class="ml-5">
                 <label class="">Product:</label>
-                <select [(ngModel)]="product" class="ml-1 border-[1px] border-black  ">
+                <select (change)="calluserdata()" [(ngModel)]="product" class="ml-1 border-[1px] border-black  ">
                   <option value="All">All</option>
                   <option value="Zarca Engage">Zarca Engage</option>
                   <option value="K12 Engage">K12 Engage</option>
@@ -32,6 +32,7 @@
               <select [(ngModel)]="selectedAccount" class="border-[1px] border-black  ">
                 <option *ngFor="let account of accounts" [value]="account.corporateNo">
                   {{ account.corporateId }}
+
                 </option>
               </select>
             </div>
