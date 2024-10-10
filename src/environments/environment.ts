@@ -8,5 +8,5 @@ export const environment = {
     baseHostUrl : "https://localhost:44316/",
     surveyUrl:"https://localhost:44316/api/Survey",
     downloadExcel :"https://localhost:44316/api/GetSurveyData/download",
-    getReportData:'https://localhost:44316/api/Users/run-report'
+    getReportData:'https://localhost:44316/api/DistributionDetails/list'
 };

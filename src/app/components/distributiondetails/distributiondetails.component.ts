@@ -20,8 +20,8 @@ export class DistributiondetailsComponent {
   selectedAccount!: number;
   checkCondition:boolean=true;
   reportData:any;
-  fromDate: Date=new Date("22-10-2012")
-  toDate: Date=new Date();
+  fromDate!: Date;
+  toDate!: Date;
   accounts: any[] = [];
 
   acc:number=0
@@ -40,7 +40,7 @@ export class DistributiondetailsComponent {
   }
   fetchAccounts(): void {
     this.apiService.getAccounts(this.acc,this.prod).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       this.accounts = [].concat(...data).sort();
     });
   }
@@ -60,7 +60,7 @@ export class DistributiondetailsComponent {
     }
     
     if (this.product == 'All') {
-      this.prod = 5;
+      this.prod = 0;
     }
     else if (this.product == 'Zarca Engage') {
       this.prod = 1;
@@ -97,7 +97,7 @@ export class DistributiondetailsComponent {
     else if (this.product == "K12 Engage + Let's Talk!")
       this.setProduct = "lt";
     else if (this.product == "All")
-      this.setProduct = " ";
+      this.setProduct = "";
 
     // Set Account to sent in backend
     if (this.accountType == "All")
@@ -109,6 +109,9 @@ export class DistributiondetailsComponent {
     else if (this.accountType == "Internal")
       this.setAccountType = "1,2,3,4,5";
 
+
+    console.log("SelectedAcc :",this.selectedAccount);
+    
     this.apiService.DataToApi(
       Number(this.selectedAccount),                
       this.fromDate,         
@@ -119,7 +122,11 @@ export class DistributiondetailsComponent {
 
     this.apiService.sendDataToApi().subscribe({
       next: (response : any) => {
-        this.reportData=response
+        console.log('Generating report for:', this.selectedReportType);
+        console.log(response);
+        
+        this.reportData=response.data[0]
+        console.log(this.reportData)
       },
       error: (error:any) => {
         console.error('Logs generation failed:', error)},
@@ -128,7 +135,7 @@ export class DistributiondetailsComponent {
       "Selected Account:",this.selectedAccount,"fromDate",this.fromDate,"todate:",this.toDate,  
     );
    
-    console.log('Generating report for:', this.selectedReportType);
+    
   }
 }
 

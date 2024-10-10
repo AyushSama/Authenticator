@@ -163,8 +163,13 @@ export class ApiService {
   }
 
   sendDataToApi() {
-    return this.http.post(this.getReportDataUrl,
-      this.reportData
+    console.log(this.reportData);
+    
+    return this.http.get(this.getReportDataUrl,{
+      params:{
+        ...this.reportData
+      }
+    }
     );
   }
 }
