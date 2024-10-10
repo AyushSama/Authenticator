@@ -20,10 +20,12 @@ export class DistributiondetailsComponent {
   selectedAccount!: number;
   checkCondition:boolean=true;
   reportData:any;
-  fromDate: Date=new Date("22-10-2012")
-  toDate: Date=new Date();
+  fromDate!: Date;
+  toDate!: Date;
   accounts: any[] = [];
 
+  acc:number=0
+  prod:number=0
 
   corpNo!:number
   startDate!:Date
@@ -37,12 +39,47 @@ export class DistributiondetailsComponent {
     this.fetchAccounts();
   }
   fetchAccounts(): void {
-    this.apiService.getAccounts().subscribe((data: any) => {
-      console.log(data.length);
-
+    this.apiService.getAccounts(this.acc,this.prod).subscribe((data: any) => {
+      // console.log(data);
       this.accounts = [].concat(...data).sort();
     });
   }
+  calluserdata(){
+    
+    if(this.accountType=='All'){
+      this.acc=0;
+    }
+    else if(this.accountType=='External'){
+      this.acc = 1;
+    }
+    else if(this.accountType=='Managed'){
+      this.acc=2;
+    }
+    else if(this.accountType=='Internal'){
+      this.acc=3;
+    }
+    
+    if (this.product == 'All') {
+      this.prod = 0;
+    }
+    else if (this.product == 'Zarca Engage') {
+      this.prod = 1;
+    } else if (this.product == 'K12 Engage') {
+      this.prod = 2;
+    } else if (this.product == 'K12 Let\'s Talk!') {
+      this.prod = 3;
+    } else if (this.product == 'K12 Engage + Let\'s Talk!') {
+      this.prod = 4;
+    }
+    console.log("Acc: ",this.acc);
+    console.log("Prod: ",this.prod);
+      
+    this.apiService.getAccounts(this.acc,this.prod).subscribe((data: any) => {
+      console.log(data);
+      this.accounts = [].concat(...data).sort();
+    });
+  }
+
   generateReport() {
     // if(this.selectedAccount.length<1 && this.fromDate.length<1 && this.toDate.length<1){
 
@@ -60,18 +97,21 @@ export class DistributiondetailsComponent {
     else if (this.product == "K12 Engage + Let's Talk!")
       this.setProduct = "lt";
     else if (this.product == "All")
-      this.setProduct = " ";
+      this.setProduct = "";
 
     // Set Account to sent in backend
     if (this.accountType == "All")
-      this.setAccountType = "1,4,5";
-    else if (this.accountType == "External")
       this.setAccountType = "2";
+    else if (this.accountType == "External")
+      this.setAccountType = "1,4,5";
     else if (this.accountType == "Managed")
       this.setAccountType = "3";
     else if (this.accountType == "Internal")
       this.setAccountType = "1,2,3,4,5";
 
+
+    console.log("SelectedAcc :",this.selectedAccount);
+    
     this.apiService.DataToApi(
       Number(this.selectedAccount),                
       this.fromDate,         
@@ -82,15 +122,20 @@ export class DistributiondetailsComponent {
 
     this.apiService.sendDataToApi().subscribe({
       next: (response : any) => {
-        this.reportData=response
+        console.log('Generating report for:', this.selectedReportType);
+        console.log(response);
+        
+        this.reportData=response.data[0]
+        console.log(this.reportData)
       },
       error: (error:any) => {
         console.error('Logs generation failed:', error)},
     });
-    // console.log("Account type:",this.setAccountType,"Product type:",this.setProduct,
-    //   "Selected Account:",this.selectedAccount,"fromDate",this.fromDate,"todate:",this.toDate,  
-    // );
+    console.log("Account type:",this.setAccountType,"Product type:",this.setProduct,
+      "Selected Account:",this.selectedAccount,"fromDate",this.fromDate,"todate:",this.toDate,  
+    );
    
-    console.log('Generating report for:', this.selectedReportType);
+    
   }
 }
+
