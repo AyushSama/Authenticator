@@ -1,0 +1,110 @@
+
+
+<div class="bg-purple-100 shadow-md p-6  mx-10 rounded-2xl mt-2" style="width: 97%;">
+    <h4 class="text-lg font-semibold text-center mb-6">Generate Report</h4>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+            <label for="account-type" class="block text-sm font-semibold text-gray-700">Account Type:</label>
+            <select name="account-type" id="account-type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200  rounded-lg overflow-hidden" [(ngModel)]="accountType">
+                <option value="All Account" selected>All</option>
+                <option value="External">External</option>
+                <option value="Managed">Managed</option>
+                <option value="Internal">Internal</option>
+            </select>
+        </div>
+        <div>
+          <label for="product" class="block text-sm font-semibold text-gray-700">Product:</label>
+          <select name="product" id="product" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 overflow-y-auto" [(ngModel)]="product">
+              <option value="All Product" selected>All</option>
+              <option value="Zarca Engage">Zarca Engage</option>
+              <option value="K12 Engage">K12 Engage</option>
+              <option value="K12 Let's talk">K12 Let's talk</option>
+              <option value="K12 engage + Let's talk">K12 Engage + Let's talk</option>
+          </select>
+      </div>
+      
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+            <label for="account-status" class="block text-sm font-semibold text-gray-700">Account Status:</label>
+            <select name="account-status" id="account-status" multiple class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" [(ngModel)]="accountStatus">
+                <option value="Active">Active</option>
+                <option value="Expired">Expired</option>
+            </select>
+        </div>
+        <div>
+            <label for="sub-account-type" class="block text-sm font-semibold text-gray-700">Sub Account Type:</label>
+            <select name="sub-account-type" id="sub-account-type" multiple class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" [(ngModel)]="subAccountType">
+                <option value="ZI-Domestic">ZI-Domestic</option>
+                <option value="ZI-International">ZI-International</option>
+                <option value="Merck-Domestic">Merck-Domestic</option>
+                <option value="Merck-International">Merck-International</option>
+                <option value="Dubai">Dubai</option>
+                <option value="Client">Client</option>
+                <option value="Partner">Partner</option>
+                <option value="Sandbox">Sandbox</option>
+                <option value="Team">Team</option>
+                <option value="Demo">Demo</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+            <label for="user-type" class="block text-sm font-semibold text-gray-700">User Type:</label>
+            <select name="user-type" id="user-type" multiple class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" [(ngModel)]="userType">
+                <option value="Account Administrators">Admin Account</option>
+                <option value="Sub-Account Users">Sub User Account</option>
+            </select>
+        </div>
+        <div>
+            <label for="country" class="block text-sm font-semibold text-gray-700">Country:</label>
+            <select name="country" id="country" multiple class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" [(ngModel)]="country">
+                <option value="USA">United States of America</option>
+                <option value="UAE">United Arab Emirates</option>
+                <option value="all-other">All others</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <label for="created-by" class="block text-sm font-semibold text-gray-700">Created By:</label>
+        <input type="text" id="created-by" name="created-by" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" [(ngModel)]="createdBy">
+    </div>
+
+    <div class="mb-4">
+        <label for="created-between" class="block text-sm font-semibold text-gray-700">Created Between:</label>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate [(ngModel)]="createdBetween.start" placeholder="Start date" class="mt-1 block w-full">
+                <input matEndDate [(ngModel)]="createdBetween.end" placeholder="End date" class="mt-1 block w-full">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+    </div>
+    
+    
+    <div class="mb-4">
+        <label for="expired-between" class="block text-sm font-semibold text-gray-700">Expired Between:</label>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="pickerExpired">
+                <input matStartDate placeholder="Start date" class="mt-1 block w-full" [(ngModel)]="expiredBetween.start">
+                <input matEndDate placeholder="End date" class="mt-1 block w-full" [(ngModel)]="expiredBetween.end">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="pickerExpired"></mat-datepicker-toggle>
+            <mat-date-range-picker #pickerExpired></mat-date-range-picker>
+        </mat-form-field>
+    </div>
+
+    <div class="flex justify-center items-center">
+        <button class="w-50% bg-blue-600 text-white font-medium p-2 rounded-md hover:bg-blue-500 transition duration-200 align-middle it" (click)="generateReport()">Generate Report</button>
+    </div>
+    
+</div>

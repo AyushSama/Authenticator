@@ -72,7 +72,8 @@ generateReport(): void {
 }
 
 ReloadMethod(){
-  window.location.reload();
+  this.genrateData = '';
+  this.areDropdownsDisabled = false;
 }
 
 }

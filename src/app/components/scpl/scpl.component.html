@@ -47,7 +47,7 @@
         id="corporateId"
         class="input-select"
       >
-        <option *ngFor="let corp of corporateIds" [value]="corp.corporate_No">
+        <option *ngFor="let corp of corporateIds |  sort: 'corporate_id'" [value]="corp.corporate_No">
           {{ corp.corporate_id }}
         </option>
       </select>
@@ -71,7 +71,7 @@
         id="surveyDetails"
         class="input-select"
       >
-        <option *ngFor="let detail of surveyDetails" [value]="detail.survey_no">
+        <option *ngFor="let detail of surveyDetails |  sort: 'title'" [value]="detail.survey_no">
           {{ detail.title }}
         </option>
       </select>
