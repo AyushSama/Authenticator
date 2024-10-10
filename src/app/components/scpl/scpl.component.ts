@@ -6,11 +6,23 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../service/api.service';
 import { SortPipe } from "../../sort.pipe";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInput, MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-scpl',
   standalone: true,
-  imports: [FormsModule, CommonModule, SortPipe],
+  imports: [
+    FormsModule, 
+    CommonModule, 
+    SortPipe,
+    MatSelectModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
+  ],
   templateUrl: './scpl.component.html',
   styleUrl: './scpl.component.css'
 })
