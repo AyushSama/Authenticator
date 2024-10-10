@@ -5,11 +5,12 @@ import { MatDialogModule,MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../service/api.service';
+import { SortPipe } from "../../sort.pipe";
 
 @Component({
   selector: 'app-scpl',
   standalone: true,
-  imports: [ FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, SortPipe],
   templateUrl: './scpl.component.html',
   styleUrl: './scpl.component.css'
 })
@@ -19,7 +20,7 @@ export class SCPLComponent implements OnInit {
   surveyDetails: SurveyDetails[] = [];
   selectedCorporateNo!: any;
   surveydetail!: SurveyDetails;
-  accountType!: string;
+  accountType: string = "";
   product!: string;
   selectSurveyNo!: string;
 
@@ -90,7 +91,7 @@ export class SCPLComponent implements OnInit {
         const url = window.URL.createObjectURL(data);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `SurveyData_${report.corpNum}.xlsx`;
+        a.download = `SurveyData_${report.surveyNo}.xlsx`;
         a.click();
         window.URL.revokeObjectURL(url);
         console.log('Report downloaded successfully');
