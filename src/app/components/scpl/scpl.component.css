@@ -1,78 +1,104 @@
-/* Global styles to ensure the content is well-displayed */
-body {
-    margin: 0; /* Remove default body margin */
-    font-family: Arial, sans-serif; /* Set a clean font */
-    background-color: #f5f5f5; /* Light gray background for contrast */
-    color: #333; /* Darker text for readability */
-    height: 100vh;
-    width: 1000px; /* Full viewport height */
-    display: flex; /* Use flexbox to center content */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-  }
-  
-  /* Styles for the report title */
-  .report-title {
-    background-color: blue; /* Background color for title */
-    color: white; /* Text color for title */
-    text-align: center; /* Center the text */
-    padding: 15px; /* Padding for spacing */
-    width: 100%; /* Full width */
-    margin-bottom: 20px; /* Space below the title */
-  }
-  
-  /* Container for the input fields */
+/* Container Styling */
+.report-container {
+
+  width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #8f7979;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow-y: none; /* Allows scrolling if content exceeds max height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* padding: 30px; */
+  height: auto;
+}
+
+
+/* Title Styling */
+.report-title {
+  border-radius: 10px;
+  background-color: rgb(196, 189, 189);
+  text-align: center;
+  font-size: 26px;
+  color: #333;
+  padding: 7px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Form Row Styling */
+.input-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 7px;
+  /* padding-top: 12px; Reduced gap between dropdowns */
+  /* margin-bottom: 10px; Reduced bottom margin */
+}
+
+.full-width {
+  width: 100%;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button[mat-raised-button] {
+  background-color: rgb(196, 189, 189);
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button[mat-raised-button]:hover {
+  transform: scale(1.07);
+  background-color: #1eb300;
+  box-shadow: 50px 50px 50px rgba(0, 0, 0, 0.3);
+  color: black;
+}
+
+@media screen and (max-width: 600px) {
   .report-container {
-    background-color: white; /* White background for the form */
-    padding: 20px; /* Padding inside the container */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-    width: 90%; /* Responsive width */
-    max-width: 600px; /* Max width for larger screens */
+    padding: 10px;
   }
-  
-  /* Styles for each row of inputs */
+
   .input-row {
-    display: flex; /* Use flexbox for layout */
-    justify-content: space-between; /* Space between labels and selects */
-    align-items: center; /* Align items in the center */
-    margin-bottom: 15px; /* Space below each row */
+    flex-direction: column; /* Stack elements vertically */
+    gap: 10px; /* Add some space between stacked items */
   }
-  
-  /* Label styles */
-  .input-label {
-    font-weight: bold; /* Bold text for labels */
-    width: 45%; /* Width of labels */
+
+  .report-title {
+    font-size: 20px; /* Reduce title size for smaller screens */
+    padding: 5px;
   }
-  
-  /* Select input styles */
-  .input-select {
-    width: 100%; /* Full width for selects */
-    padding: 8px; /* Padding for selects */
-    border: 1px solid #ccc; /* Light border */
-    border-radius: 4px; /* Slightly rounded corners */
+
+  button[mat-raised-button] {
+    width: 100%; /* Full-width buttons for easier clicking */
+    padding: 10px 20px; /* Adjust padding for smaller screens */
   }
-  
-  /* Container for buttons */
-  .button-container {
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Center buttons */
-    margin-top: 20px; /* Space above buttons */
+}
+
+/* Tablets (max-width: 1024px) */
+@media screen and (max-width: 1024px) {
+  .report-container {
+    max-width: 90%; /* Adjust width for tablets */
   }
-  
-  /* Styles for the generate report button */
-  .generate-button {
-    background-color: rgb(97, 186, 245); /* Button background color */
-    color: white; /* Text color */
-    border: none; /* Remove border */
-    padding: 10px 15px; /* Padding */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 4px; /* Slightly rounded corners */
-    transition: background-color 0.3s; /* Smooth transition */
+
+  .input-row {
+    flex-direction: column; /* Stack elements vertically on tablets */
+    gap: 12px; /* Slightly larger gap for tablet screens */
   }
-  
-  /* Hover effect for the button */
-  .generate-button:hover {
-    background-color: rgb(77, 163, 229); /* Darker shade on hover */
+
+  .report-title {
+    font-size: 22px; /* Slightly smaller font for tablets */
   }
-  
+
+  button[mat-raised-button] {
+    padding: 10px 25px; /* Slightly smaller padding for tablets */
+  }
+}
