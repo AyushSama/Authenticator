@@ -10,7 +10,7 @@
         <label for="accountType" class="block text-gray-700 mb-2">Account Type:</label>
         <select id="accountType" 
                 class="block w-full p-3 border border-gray-300 rounded-lg focus:ring-gray-600 focus:border-gray-600"
-                [(ngModel)]="accountType" (change)="onAccountTypeChange()">
+                [(ngModel)]="accountType" [disabled]="areDropdownsDisabled" (change)="onAccountTypeChange()">
           <option value="0">All</option>
           <option value="1">External</option>
           <option value="2">Managed</option>
@@ -21,7 +21,7 @@
         <label for="product" class="block text-gray-700 mb-2">Product:</label>
         <select id="product" 
                 class="block w-full p-3 border border-gray-300 rounded-lg focus:ring-gray-600 focus:border-gray-600"
-                [(ngModel)]="product" (change)="onProductChange()">
+                [(ngModel)]="product" [disabled]="areDropdownsDisabled" (change)="onProductChange()">
           <option value="0">All</option>
           <option value="1">Sogo</option>
           <option value="2">CX</option>
