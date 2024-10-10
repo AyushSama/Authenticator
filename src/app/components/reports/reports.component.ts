@@ -65,7 +65,7 @@ export class ReportsComponent implements OnInit {
     }
     else if(this.menuId==4 && button.menuId==8 ){
       this.generateData='LoginDetails';
-    }else if (button.menuName === 'Client List') {
+    }else if (this.menuId==4 && button.menuId==11) {
       this.generateData='clientList';
     }else if(this.menuId==4 && button.menuId==9 ){
       this.generateData='scpl';

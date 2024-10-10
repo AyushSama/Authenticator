@@ -119,7 +119,7 @@ export class ApiService {
   }
 
   getAllUsers():Observable<any>{
-    return this.http.get<any>(this.corpDataUrl);
+    return this.http.get<any>(`${this.baseHostUrl}api/MsSurCorp/list`);
   }
 
   fetchUserFeatures(corporate_no:number):Observable<any>{
